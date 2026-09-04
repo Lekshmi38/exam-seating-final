@@ -1,0 +1,16 @@
+# Environment and secrets
+.env
+.env.*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+
+# Runtime data
+flask_session/*
+uploads/*
+processed_data/*
+seating_arrangement_output/*

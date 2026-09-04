@@ -1,0 +1,16 @@
+.git
+.idea
+.venv
+.env
+.env.*
+__pycache__
+*.py[cod]
+*.log
+
+flask_session/*
+uploads/*
+processed_data/*
+seating_arrangement_output/*
+
+Dockerfile
+.dockerignore
