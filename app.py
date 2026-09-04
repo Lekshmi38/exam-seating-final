@@ -40,7 +40,7 @@ except ImportError:
     SERIES_PDF_AVAILABLE = False
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-only-change-me')
 
 # Configure server-side session
 app.config['SESSION_TYPE'] = 'filesystem'
