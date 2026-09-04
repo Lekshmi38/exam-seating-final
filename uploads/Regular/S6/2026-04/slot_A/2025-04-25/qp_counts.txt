@@ -1,0 +1,39 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: COMPILER DESIGN ( CST302 ) - 19 students
+Room1: ELECTROMAGNETICS ( ECT302 ) - 12 students
+Room2: COMPILER DESIGN ( CST302 ) - 19 students
+Room2: INTERNETWORKING WITH TCP/IP ( ITT302 ) - 11 students
+Room3: COMPILER DESIGN ( CST302 ) - 20 students
+Room3: ELECTROMAGNETICS ( ECT302 ) - 11 students
+Room4: COMPILER DESIGN ( CST302 ) - 19 students
+Room4: STRUCTURAL ANALYSIS - II ( CET302 ) - 13 students
+Room5: COMPILER DESIGN ( CST302 ) - 18 students
+Room5: ELECTROMAGNETICS ( ECT302 ) - 14 students
+Room6: COMPILER DESIGN ( CST302 ) - 12 students
+Room6: INTERNETWORKING WITH TCP/IP ( ITT302 ) - 20 students
+Room7: ELECTROMAGNETICS ( ECT302 ) - 18 students
+Room7: STRUCTURAL ANALYSIS - II ( CET302 ) - 14 students
+Room8: COMPILER DESIGN ( CST302 ) - 11 students
+Room8: ELECTROMAGNETICS ( ECT302 ) - 20 students
+Room9: INTERNETWORKING WITH TCP/IP ( ITT302 ) - 10 students
+Room9: STRUCTURAL ANALYSIS - II ( CET302 ) - 20 students
+Room10: ELECTROMAGNETICS ( ECT302 ) - 31 students
+Room11: COMPILER DESIGN ( CST302 ) - 18 students
+Room11: INTERNETWORKING WITH TCP/IP ( ITT302 ) - 12 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+COMPILER DESIGN ( CST302 ): 136 students
+ELECTROMAGNETICS ( ECT302 ): 106 students
+INTERNETWORKING WITH TCP/IP ( ITT302 ): 53 students
+STRUCTURAL ANALYSIS - II ( CET302 ): 47 students
+
+Total Students: 342
+============================================================

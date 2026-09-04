@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block page_title %}Dashboard - Exam System{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Welcome Section -->
+    <div class="welcome-card card">
+        <div class="welcome-content">
+            <h2>Welcome to ExNova</h2>
+            <p>Examination Management System</p>
+        </div>
+        <div class="welcome-stats">
+            <div class="stat">
+                <span class="stat-label">Exam Mode</span>
+                <span class="stat-value">{% if session.get('exam_type') %}{{ session.exam_type }}{% else %}Not Set{% endif %}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exam Type Selection -->
+    <h2 class="section-title">
+        <i class="fas fa-graduation-cap"></i>
+        Select Examination Type
+    </h2>
+
+    <div class="exam-grid">
+        <!-- Regular Exam Card -->
+        <div class="exam-card" onclick="selectExam('Regular')">
+            <div class="exam-card-header">
+                <div class="exam-icon regular">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Regular Examination</h3>
+                <span class="exam-badge">Standard</span>
+            </div>
+            <div class="exam-card-footer">
+                <button class="btn btn-primary btn-block select-exam" data-exam="Regular">
+                    Select Regular
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Series Exam Card -->
+        <div class="exam-card" onclick="selectExam('Series')">
+            <div class="exam-card-header">
+                <div class="exam-icon series">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Series Examination</h3>
+                <span class="exam-badge series-badge">Quick Setup</span>
+            </div>
+            <div class="exam-card-footer">
+                <button class="btn btn-success btn-block select-exam" data-exam="Series">
+                    Select Series
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Hidden Form -->
+    <form id="examForm" method="POST" action="{{ url_for('set_exam_type') }}" style="display: none;">
+        <input type="hidden" name="exam_type" id="selectedExam">
+    </form>
+</div>
+
+<script>
+let isSubmitting = false;
+
+function selectExam(type) {
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    document.getElementById('selectedExam').value = type;
+    document.getElementById('examForm').submit();
+}
+
+// Add click handlers to buttons
+document.querySelectorAll('.select-exam').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const exam = this.dataset.exam;
+        selectExam(exam);
+    });
+});
+</script>
+{% endblock %}

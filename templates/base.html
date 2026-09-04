@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExNova - Examination Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <span class="logo-text">ExNova</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' else '' }}">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    {% if session.get('exam_type') == 'Regular' %}
+                    <li class="nav-divider">REGULAR EXAM</li>
+                    <li>
+                        <a href="{{ url_for('regular_upload') }}" class="{{ 'active' if request.endpoint == 'regular_upload' else '' }}">
+                            <i class="fas fa-upload"></i>
+                            <span>Data Upload</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('regular_allocation') }}" class="{{ 'active' if request.endpoint == 'regular_allocation' else '' }}">
+                            <i class="fas fa-chair"></i>
+                            <span>Seat Allocation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('regular_preview') }}" class="{{ 'active' if request.endpoint == 'regular_preview' else '' }}">
+                            <i class="fas fa-eye"></i>
+                            <span>Preview</span>
+                        </a>
+                    </li>
+
+                    {% elif session.get('exam_type') == 'Series' %}
+                    <li class="nav-divider">SERIES EXAM</li>
+                    <li>
+                        <a href="{{ url_for('series_entry') }}" class="{{ 'active' if request.endpoint == 'series_entry' else '' }}">
+                            <i class="fas fa-pencil-alt"></i>
+                            <span>Data Entry</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('series_allocation') }}" class="{{ 'active' if request.endpoint == 'series_allocation' else '' }}">
+                            <i class="fas fa-cogs"></i>
+                            <span>Generate</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('series_results') }}" class="{{ 'active' if request.endpoint == 'series_results' else '' }}">
+                            <i class="fas fa-table"></i>
+                            <span>Results</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('series_files') }}" class="{{ 'active' if request.endpoint == 'series_files' else '' }}">
+                            <i class="fas fa-folder-open"></i>
+                            <span>View Files</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                {% if session.get('exam_type') %}
+                <div class="exam-mode {{ session.exam_type|lower }}-mode">
+                    <i class="fas {% if session.exam_type == 'Regular' %}fa-calendar-alt{% else %}fa-layer-group{% endif %}"></i>
+                    <div class="mode-info">
+                        <span class="mode-label">Active Mode</span>
+                        <span class="mode-value">{{ session.exam_type }}</span>
+                    </div>
+                </div>
+                <a href="{{ url_for('index') }}" class="change-mode">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Change</span>
+                </a>
+                {% endif %}
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>{% block page_title %}Examination System{% endblock %}</h1>
+                </div>
+                <div class="top-bar-actions">
+                    <div class="datetime">
+                        <i class="far fa-calendar-alt"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="flash-container">
+                            {% for category, message in messages %}
+                                <div class="flash-message flash-{{ category }}">
+                                    <i class="fas {% if category == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+                                    <span>{{ message }}</span>
+                                    <button class="flash-close" onclick="this.parentElement.remove()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

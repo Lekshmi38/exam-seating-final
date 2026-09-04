@@ -1,0 +1,828 @@
+{% extends "base.html" %}
+
+{% block page_title %}Results - Regular Exam{% endblock %}
+
+{% block content %}
+<div class="results-container">
+    {% if not arrangement %}
+    <div class="alert warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>No arrangement found.</span>
+        <a href="{{ url_for('regular_allocation') }}" class="btn btn-primary">Generate New</a>
+    </div>
+    {% else %}
+    <!-- Header -->
+    <div class="results-header">
+        <div class="header-left">
+            <h2><i class="fas fa-chair"></i> Seating Arrangement</h2>
+            {% if params %}
+            <div class="exam-info">
+                <span class="info-item"><i class="fas fa-layer-group"></i> {{ params.semester }}</span>
+                <span class="info-item"><i class="fas fa-calendar"></i> {{ params.month_year }}</span>
+                <span class="info-item"><i class="fas fa-clock"></i> Slot {{ params.slot }}</span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="header-right">
+            <span class="badge regular">Regular Exam</span>
+        </div>
+    </div>
+
+    <!-- View Controls (shown when NOT in edit mode) -->
+    <div class="controls-bar" id="viewControls">
+        <button class="btn btn-secondary" onclick="window.print()">
+            <i class="fas fa-print"></i> Print
+        </button>
+
+        <a href="{{ url_for('regular_allocation') }}" class="btn btn-primary">
+            <i class="fas fa-redo"></i> Generate New
+        </a>
+        <button class="btn btn-warning" id="editToggleBtn" onclick="enableEditMode()">
+            <i class="fas fa-edit"></i> Enable Manual Edit
+        </button>
+    </div>
+
+    <!-- Edit toolbar (shown ONLY in edit mode) -->
+    <div class="edit-toolbar" id="editToolbar">
+        <div class="edit-toolbar-left">
+            <i class="fas fa-info-circle"></i>
+            <span><strong>Edit Mode Active</strong> — Drag any student chip to a new cell. Dropping at row 1 pushes others down. Capacity is enforced.</span>
+        </div>
+        <div class="edit-toolbar-right">
+            <button class="btn btn-secondary btn-sm" onclick="undoEdit()">
+                <i class="fas fa-undo"></i> Undo
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="cancelEditMode()">
+                <i class="fas fa-times"></i> Cancel
+            </button>
+            <button class="btn btn-success btn-sm" onclick="saveEdits()">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-door-open"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.summary.total_rooms }}</span>
+                <span class="stat-label">Total Rooms</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="stat-content">
+                <span class="stat-value" id="statTotalStudents">{{ arrangement.student_count }}</span>
+                <span class="stat-label">Total Students</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.summary.average|round(1) }}</span>
+                <span class="stat-label">Average/Room</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.summary.best_leftovers }}</span>
+                <span class="stat-label">Leftovers</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seating Arrangements -->
+    <div class="seating-section" id="seatingSection">
+        {% for room_name, room_data in arrangement.rooms.items() %}
+        {% set rkey = room_name | replace(' ', '_') %}
+        <div class="room-card" data-room="{{ room_name }}">
+            <div class="room-header">
+                <div class="room-title">
+                    <i class="fas fa-door-open"></i>
+                    <h3>{{ room_name }}</h3>
+                </div>
+                <div class="room-stats">
+                    <span class="room-total" id="roomTotal-{{ rkey }}">{{ room_data.total }} students</span>
+                </div>
+            </div>
+
+            <div class="room-subjects">
+                <i class="fas fa-book"></i>
+                {% for subject in room_data.subjects %}
+                <span class="subject-tag">{{ subject }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="seating-table-wrapper">
+                <table class="seating-table">
+                    <thead>
+                        <tr>
+                            <th>Row</th>
+                            <th>Left1 (7)</th>
+                            <th>Left3 (7)</th>
+                            <th>Middle2 (6)</th>
+                            <th>Right1 (7)</th>
+                            <th>Right3 (7)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set blocks = ['Left1','Left3','Middle2','Right1','Right3'] %}
+                        {% for row in range(0, 7) %}
+                        <tr>
+                            <td class="row-number">{{ row + 1 }}</td>
+                            {% for blk in blocks %}
+                            {% set cap = {'Left1':7,'Left3':7,'Middle2':6,'Right1':7,'Right3':7}[blk] %}
+                            <td class="student-cell"
+                                data-room="{{ room_name }}"
+                                data-block="{{ blk }}"
+                                data-row="{{ row }}"
+                                data-cap="{{ cap }}">
+                                {% if row < room_data.blocks[blk].students | length %}
+                                    {% set val = room_data.blocks[blk].students[row] %}
+                                    {% if val and val != '--' %}
+                                    <div class="student-chip"
+                                         draggable="false"
+                                         data-roll="{{ val }}"
+                                         data-room="{{ room_name }}"
+                                         data-block="{{ blk }}"
+                                         data-row="{{ row }}">{{ val }}</div>
+                                    {% else %}
+                                    <span class="empty-cell">--</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="empty-cell">--</span>
+                                {% endif %}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="block-stats">
+                {% for blk, cap in [('Left1',7),('Left3',7),('Middle2',6),('Right1',7),('Right3',7)] %}
+                <div class="block-stat" id="bstat-{{ rkey }}-{{ blk }}">
+                    <span>{{ blk }}</span>
+                    <strong>{{ room_data.blocks[blk].count }}/{{ cap }}</strong>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- QP Counts Section -->
+    {% if arrangement.qp_summary %}
+    <div class="qp-section">
+        <div class="section-header">
+            <h3><i class="fas fa-calculator"></i> Question Paper Counts</h3>
+                    </div>
+        <div class="qp-summary">
+            <div class="subject-summary">
+                <h4>Subject-wise Distribution</h4>
+                <div class="qp-grid">
+                    {% for subject, count in arrangement.qp_summary.subject_summary.items() %}
+                    <div class="qp-card">
+                        <span class="qp-subject">{{ subject }}</span>
+                        <span class="qp-count">{{ count }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="room-summary">
+                <h4>Room-wise Distribution</h4>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Room</th><th>Subject</th><th>Count</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for item in arrangement.qp_summary.room_wise %}
+                            <tr>
+                                <td>{{ item.Room }}</td>
+                                <td>{{ item.Subject }}</td>
+                                <td><strong>{{ item['Student Count'] }}</strong></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+<!-- Saving overlay -->
+<div id="saveOverlay">
+    <div class="save-overlay-box">
+        <i class="fas fa-spinner fa-spin"></i>
+        <strong>Saving and regenerating files…</strong>
+        <p>This may take a few seconds</p>
+    </div>
+</div>
+
+<style>
+/* ── Save overlay ────────────────────────────────────────────── */
+#saveOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+#saveOverlay.visible { display: flex; }
+.save-overlay-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 2rem 3rem;
+    text-align: center;
+    box-shadow: 0 24px 48px rgba(0,0,0,.25);
+}
+.save-overlay-box i {
+    font-size: 2.2rem;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 1rem;
+}
+.save-overlay-box strong { font-size: 1rem; color: var(--dark); }
+.save-overlay-box p { margin-top: .4rem; color: var(--gray-500); font-size: .85rem; }
+
+/* ── Edit toolbar ────────────────────────────────────────────── */
+.edit-toolbar {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .9rem 1.25rem;
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    border: 1.5px solid #fcd34d;
+    border-radius: var(--radius-xl);
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    animation: fadeIn .25s var(--ease);
+}
+.edit-toolbar.visible { display: flex; }
+.edit-toolbar-left {
+    display: flex;
+    align-items: flex-start;
+    gap: .55rem;
+    font-size: .84rem;
+    color: #78350f;
+    flex: 1;
+    line-height: 1.5;
+}
+.edit-toolbar-left i { color: #d97706; flex-shrink: 0; margin-top: .15rem; }
+.edit-toolbar-right { display: flex; gap: .55rem; flex-wrap: wrap; }
+
+/* ── Warning button ──────────────────────────────────────────── */
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    border-color: #d97706;
+    box-shadow: 0 2px 8px rgba(217,119,6,.3);
+}
+.btn-warning:hover {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(180,83,9,.35);
+}
+
+/* ── Edit mode room highlight ────────────────────────────────── */
+.edit-active .room-card {
+    border-color: #fcd34d !important;
+    box-shadow: 0 0 0 2px rgba(253,211,77,.25), var(--shadow-sm) !important;
+    transition: border-color .2s;
+}
+
+/* ── Student chip ────────────────────────────────────────────── */
+.student-chip {
+    display: inline-block;
+    padding: .22rem .6rem;
+    background: var(--primary-50);
+    border: 1.5px solid var(--primary-200);
+    border-radius: var(--radius-md);
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    white-space: nowrap;
+    user-select: none;
+    cursor: default;
+    transition: all .15s;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.edit-active .student-chip {
+    cursor: grab;
+    background: var(--white);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-xs);
+}
+.edit-active .student-chip:hover {
+    background: var(--primary-100);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+.student-chip.is-dragging {
+    opacity: .35;
+    cursor: grabbing !important;
+}
+
+/* ── Cell drop zones ─────────────────────────────────────────── */
+.edit-active .student-cell {
+    min-width: 88px;
+    cursor: default;
+}
+.student-cell.dz-over {
+    background: #dbeafe !important;
+    outline: 2px dashed var(--primary);
+    outline-offset: -2px;
+    border-radius: 4px;
+}
+.student-cell.dz-top {
+    background: #e0f2fe !important;
+    outline: 2px dashed #0ea5e9;
+    outline-offset: -2px;
+    border-top: 3px solid #0ea5e9;
+}
+.student-cell.dz-full {
+    background: #fee2e2 !important;
+    outline: 2px dashed #dc2626;
+    outline-offset: -2px;
+    cursor: not-allowed;
+}
+
+/* ── Modified badge on room ──────────────────────────────────── */
+.room-card { position: relative; }
+.room-card.modified::after {
+    content: 'Modified';
+    position: absolute;
+    top: .7rem;
+    right: .7rem;
+    background: var(--warning);
+    color: #fff;
+    font-size: .62rem;
+    font-weight: 800;
+    padding: .12rem .55rem;
+    border-radius: var(--radius-full);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+/* ── Existing page styles ────────────────────────────────────── */
+.results-container { max-width: 1200px; margin: 0 auto; }
+.results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+.header-left h2 { color: var(--dark); margin-bottom: .5rem; }
+.header-left h2 i { color: var(--primary); margin-right: .5rem; }
+.exam-info { display: flex; gap: 1rem; flex-wrap: wrap; }
+.info-item { display: flex; align-items: center; gap: .25rem; color: var(--gray-500); font-size: .875rem; }
+.info-item i { color: var(--primary); }
+.room-title { display: flex; align-items: center; gap: .5rem; }
+.room-title i { color: var(--primary); font-size: 1.2rem; }
+.room-title h3 { margin: 0; font-size: 1.1rem; }
+.room-subjects { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; padding: .75rem; background: var(--gray-100); border-radius: var(--radius-lg); }
+.subject-tag { padding: .25rem .75rem; background: var(--white); border-radius: var(--radius-lg); font-size: .875rem; color: var(--primary); border: 1px solid var(--gray-200); }
+.qp-section { background: var(--white); border-radius: var(--radius-xl); padding: 1.5rem; margin-top: 2rem; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray-200); flex-wrap: wrap; gap: .75rem; }
+.section-header h3 { display: flex; align-items: center; gap: .5rem; color: var(--dark); }
+.section-header h3 i { color: var(--primary); }
+.qp-summary { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+.subject-summary h4, .room-summary h4 { color: var(--dark); margin-bottom: 1rem; font-size: 1rem; }
+
+/* Toast */
+.rr-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10000;
+    padding: .75rem 1.25rem;
+    border-radius: 10px;
+    font-size: .875rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    animation: fadeIn .25s ease;
+    max-width: 320px;
+    line-height: 1.4;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .qp-summary { grid-template-columns: 1fr; }
+    .edit-toolbar { flex-direction: column; align-items: flex-start; }
+    .edit-toolbar-right { width: 100%; }
+}
+@media print {
+    .controls-bar, .edit-toolbar, #saveOverlay { display: none !important; }
+}
+</style>
+
+<script>
+/* ================================================================
+   STATE MODEL
+   state[roomName][blockName] = ['LBT23CS001', '--', 'LBT23CS002', ...]
+   Each array has exactly BLOCK_CAPS[blk] entries.
+================================================================ */
+
+const BLOCK_CAPS = { Left1:7, Left3:7, Middle2:6, Right1:7, Right3:7 };
+const BLOCK_LIST = ['Left1','Left3','Middle2','Right1','Right3'];
+
+let state   = {};    // live editing state
+let saved   = {};    // snapshot at edit-mode entry (for Cancel)
+let history = [];    // snapshots for Undo
+let editMode = false;
+let dragInfo = null; // { roll, srcRoom, srcBlock }
+
+/* ── Deep clone ──────────────────────────────────────────────── */
+const clone = o => JSON.parse(JSON.stringify(o));
+
+/* ── Build state from rendered DOM ──────────────────────────── */
+function buildState() {
+    const s = {};
+    document.querySelectorAll('.room-card').forEach(card => {
+        const room = card.dataset.room;
+        s[room] = {};
+        BLOCK_LIST.forEach(blk => {
+            const cap = BLOCK_CAPS[blk];
+            s[room][blk] = [];
+            for (let r = 0; r < cap; r++) {
+                const cell = card.querySelector(
+                    `td[data-block="${blk}"][data-row="${r}"]`);
+                const chip = cell ? cell.querySelector('.student-chip') : null;
+                s[room][blk].push(chip ? chip.dataset.roll : '--');
+            }
+        });
+    });
+    return s;
+}
+
+/* ── Count non-empty seats in a block ───────────────────────── */
+function blockFill(room, blk) {
+    return (state[room][blk] || []).filter(v => v && v !== '--').length;
+}
+
+/* ── Remove roll from its current block array ────────────────── */
+function removeRoll(room, blk, roll) {
+    const arr = state[room][blk];
+    const i   = arr.indexOf(roll);
+    if (i !== -1) { arr.splice(i, 1); arr.push('--'); }
+}
+
+/* ── Insert roll at given row index (push others down) ───────── */
+function insertRoll(room, blk, row, roll) {
+    const arr = state[room][blk];
+    const cap = BLOCK_CAPS[blk];
+    // remove existing occurrence in this block (for intra-block moves)
+    const ei = arr.indexOf(roll);
+    if (ei !== -1) arr.splice(ei, 1);
+    arr.splice(row, 0, roll);
+    while (arr.length > cap) arr.pop();   // trim overflow
+    while (arr.length < cap) arr.push('--'); // pad
+}
+
+/* ── Re-render DOM from state ────────────────────────────────── */
+function render() {
+    document.querySelectorAll('.room-card').forEach(card => {
+        const room = card.dataset.room;
+        if (!state[room]) return;
+
+        BLOCK_LIST.forEach(blk => {
+            const cap = BLOCK_CAPS[blk];
+            const arr = state[room][blk] || [];
+            for (let r = 0; r < cap; r++) {
+                const cell = card.querySelector(
+                    `td[data-block="${blk}"][data-row="${r}"]`);
+                if (!cell) continue;
+                const val = arr[r] || '--';
+                if (val !== '--') {
+                    cell.innerHTML =
+                        `<div class="student-chip"
+                              draggable="${editMode}"
+                              data-roll="${val}"
+                              data-room="${room}"
+                              data-block="${blk}"
+                              data-row="${r}">${val}</div>`;
+                    if (editMode)
+                        bindChip(cell.querySelector('.student-chip'));
+                } else {
+                    cell.innerHTML = `<span class="empty-cell">--</span>`;
+                }
+            }
+        });
+
+        // Update block-stat badges
+        BLOCK_LIST.forEach(blk => {
+            const cap = BLOCK_CAPS[blk];
+            const cnt = blockFill(room, blk);
+            const el  = document.getElementById(
+                `bstat-${room.replace(/ /g,'_')}-${blk}`);
+            if (el) el.querySelector('strong').textContent = `${cnt}/${cap}`;
+        });
+
+        // Update room total
+        const total = BLOCK_LIST.reduce((s, b) => s + blockFill(room, b), 0);
+        const te = document.getElementById(
+            `roomTotal-${room.replace(/ /g,'_')}`);
+        if (te) te.textContent = `${total} students`;
+    });
+
+    // Re-attach cell events after full re-render
+    if (editMode) {
+        document.querySelectorAll('.student-cell').forEach(bindCell);
+    }
+}
+
+/* ── Bind drag events to a chip ─────────────────────────────── */
+function bindChip(chip) {
+    chip.ondragstart = e => {
+        dragInfo = {
+            roll:     chip.dataset.roll,
+            srcRoom:  chip.dataset.room,
+            srcBlock: chip.dataset.block,
+        };
+        chip.classList.add('is-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', chip.dataset.roll);
+    };
+    chip.ondragend = () => {
+        chip.classList.remove('is-dragging');
+        dragInfo = null;
+        clearDzClasses();
+    };
+}
+
+/* ── Bind drop events to a cell ─────────────────────────────── */
+function bindCell(cell) {
+    cell.ondragover = e => {
+        e.preventDefault();
+        if (!dragInfo) return;
+        clearDzClasses();
+
+        const dstRoom  = cell.dataset.room;
+        const dstBlock = cell.dataset.block;
+        const dstRow   = parseInt(cell.dataset.row);
+
+        // Is adding a new roll?
+        const inBlock = (state[dstRoom][dstBlock] || []).includes(dragInfo.roll);
+        const full    = !inBlock && blockFill(dstRoom, dstBlock) >= BLOCK_CAPS[dstBlock];
+
+        if (full) {
+            cell.classList.add('dz-full');
+            e.dataTransfer.dropEffect = 'none';
+        } else if (dstRow === 0) {
+            cell.classList.add('dz-top');
+            e.dataTransfer.dropEffect = 'move';
+        } else {
+            cell.classList.add('dz-over');
+            e.dataTransfer.dropEffect = 'move';
+        }
+    };
+    cell.ondragleave = () => clearDzClasses();
+    cell.ondrop = e => {
+        e.preventDefault();
+        clearDzClasses();
+        if (!dragInfo) return;
+
+        const dstRoom  = cell.dataset.room;
+        const dstBlock = cell.dataset.block;
+        const dstRow   = parseInt(cell.dataset.row);
+        const { roll, srcRoom, srcBlock } = dragInfo;
+
+        // Same cell? ignore
+        if (srcRoom === dstRoom && srcBlock === dstBlock &&
+            (state[dstRoom][dstBlock] || [])[dstRow] === roll) return;
+
+        // Capacity check
+        const inBlock = (state[dstRoom][dstBlock] || []).includes(roll);
+        if (!inBlock && blockFill(dstRoom, dstBlock) >= BLOCK_CAPS[dstBlock]) {
+            toast('This block is full — remove a student first.', 'error');
+            return;
+        }
+
+        // Save undo snapshot
+        history.push(clone(state));
+        if (history.length > 60) history.shift();
+
+        // Move
+        removeRoll(srcRoom, srcBlock, roll);
+        insertRoll(dstRoom, dstBlock, dstRow, roll);
+
+        // Mark rooms modified
+        document.querySelector(`.room-card[data-room="${srcRoom}"]`)
+            ?.classList.add('modified');
+        document.querySelector(`.room-card[data-room="${dstRoom}"]`)
+            ?.classList.add('modified');
+
+        render();
+    };
+}
+
+function clearDzClasses() {
+    document.querySelectorAll('.student-cell')
+        .forEach(c => c.classList.remove('dz-over','dz-top','dz-full'));
+}
+
+/* ── Enable edit mode ────────────────────────────────────────── */
+function enableEditMode() {
+    state    = buildState();
+    saved    = clone(state);
+    history  = [];
+    editMode = true;
+
+    document.getElementById('viewControls').style.display  = 'none';
+    document.getElementById('editToolbar').classList.add('visible');
+    document.getElementById('seatingSection').classList.add('edit-active');
+
+    document.querySelectorAll('.student-chip').forEach(chip => {
+        chip.draggable = true;
+        bindChip(chip);
+    });
+    document.querySelectorAll('.student-cell').forEach(bindCell);
+}
+
+/* ── Cancel edit mode ────────────────────────────────────────── */
+function cancelEditMode() {
+    state    = clone(saved);
+    history  = [];
+    editMode = false;
+
+    render();   // restore original
+
+    document.getElementById('viewControls').style.display = 'flex';
+    document.getElementById('editToolbar').classList.remove('visible');
+    document.getElementById('seatingSection').classList.remove('edit-active');
+    document.querySelectorAll('.room-card').forEach(c => c.classList.remove('modified'));
+
+    // Remove drag events
+    document.querySelectorAll('.student-chip').forEach(c => {
+        c.draggable = false; c.ondragstart = null; c.ondragend = null;
+    });
+    document.querySelectorAll('.student-cell').forEach(c => {
+        c.ondragover = null; c.ondragleave = null; c.ondrop = null;
+    });
+}
+
+/* ── Undo ────────────────────────────────────────────────────── */
+function undoEdit() {
+    if (!history.length) { toast('Nothing to undo', 'warning'); return; }
+    state = history.pop();
+    render();
+}
+
+/* ── Save edits to server ────────────────────────────────────── */
+function saveEdits() {
+    const modified = document.querySelectorAll('.room-card.modified');
+    if (!modified.length) { toast('No changes to save', 'warning'); return; }
+
+    // Build updated rooms payload
+    const updatedRooms = {};
+    document.querySelectorAll('.room-card').forEach(card => {
+        const room = card.dataset.room;
+        updatedRooms[room] = { blocks: {}, total: 0, subjects: [] };
+
+        // subjects — keep original
+        card.querySelectorAll('.subject-tag').forEach(t => {
+            updatedRooms[room].subjects.push(t.textContent.trim());
+        });
+
+        BLOCK_LIST.forEach(blk => {
+            const cap  = BLOCK_CAPS[blk];
+            const arr  = state[room][blk] || [];
+            const students = [];
+            for (let i = 0; i < cap; i++) students.push(arr[i] || '--');
+            const count = students.filter(v => v && v !== '--').length;
+            updatedRooms[room].blocks[blk] = { students, count, capacity: cap };
+            updatedRooms[room].total += count;
+        });
+    });
+
+    const overlay = document.getElementById('saveOverlay');
+    overlay.classList.add('visible');
+
+    fetch('{{ url_for("save_arrangement") }}', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rooms: updatedRooms })
+    })
+    .then(r => r.json())
+    .then(data => {
+        overlay.classList.remove('visible');
+        if (data.success) {
+            toast('Saved! All files updated.', 'success');
+            saved   = clone(state);
+            history = [];
+            document.querySelectorAll('.room-card')
+                .forEach(c => c.classList.remove('modified'));
+            // Exit edit mode cleanly (state already saved)
+            editMode = false;
+            document.getElementById('viewControls').style.display = 'flex';
+            document.getElementById('editToolbar').classList.remove('visible');
+            document.getElementById('seatingSection').classList.remove('edit-active');
+            document.querySelectorAll('.student-chip').forEach(c => {
+                c.draggable = false; c.ondragstart = null; c.ondragend = null;
+            });
+            document.querySelectorAll('.student-cell').forEach(c => {
+                c.ondragover = null; c.ondragleave = null; c.ondrop = null;
+            });
+        } else {
+            toast('Save failed: ' + (data.error || 'unknown error'), 'error');
+        }
+    })
+    .catch(err => {
+        overlay.classList.remove('visible');
+        toast('Network error: ' + err.message, 'error');
+    });
+}
+
+/* ── Toast ───────────────────────────────────────────────────── */
+function toast(msg, type) {
+    const bg = { success:'#10b981', error:'#dc2626',
+                 warning:'#d97706', info:'#1d4ed8' };
+    const el = document.createElement('div');
+    el.className = 'rr-toast';
+    el.style.background = bg[type] || bg.info;
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+
+/* ── Existing download / print ───────────────────────────────── */
+function downloadReport() {
+    let r = '';
+    r += '='.repeat(80) + '\n';
+    r += 'REGULAR EXAM SEATING ARRANGEMENT REPORT\n';
+    r += '='.repeat(80) + '\n\n';
+    {% if params %}
+    r += 'Semester: {{ params.semester }}\n';
+    r += 'Month-Year: {{ params.month_year }}\n';
+    r += 'Slot: {{ params.slot }}\n';
+    r += 'Generated: ' + new Date().toLocaleString() + '\n\n';
+    {% endif %}
+    {% if arrangement.qp_summary %}
+    r += 'QUESTION PAPER COUNTS\n';
+    r += '-'.repeat(40) + '\n';
+    {% for subject, count in arrangement.qp_summary.subject_summary.items() %}
+    r += '{{ subject }}: {{ count }} students\n';
+    {% endfor %}
+    r += 'Total: {{ arrangement.qp_summary.total_students }} students\n\n';
+    {% endif %}
+    {% for room_name, room_data in arrangement.rooms.items() %}
+    r += '='.repeat(80) + '\n';
+    r += '{{ room_name }} | Total: {{ room_data.total }} students\n';
+    r += '='.repeat(80) + '\n';
+    r += 'Row   | Left1      | Left3      | Middle2    | Right1     | Right3     \n';
+    r += '-'.repeat(70) + '\n';
+    {% for row in range(1, 8) %}
+    { let ln = '{{ row }}'.padEnd(5);
+    {% for block in ['Left1','Left3','Middle2','Right1','Right3'] %}
+    {% if block != 'Middle2' or row <= 6 %}
+    ln += ' | ' + ('{{ room_data.blocks[block].students[row-1] if row <= room_data.blocks[block].students|length else "--" }}').padEnd(10);
+    {% endif %}
+    {% endfor %}
+    r += ln + '\n'; }
+    {% endfor %}
+    r += '\n';
+    {% endfor %}
+    const blob = new Blob([r], {type:'text/plain'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'Regular_Exam_Report.txt'; a.click();
+    URL.revokeObjectURL(url);
+}
+
+function printQpReport() {
+    const w = window.open('','_blank');
+    w.document.write(`<html><head><title>QP Report</title>
+    <style>body{font-family:Arial,sans-serif;padding:20px}
+    h1{color:#2563eb;text-align:center}
+    table{width:100%;border-collapse:collapse;margin-top:20px}
+    th{background:#f1f5f9;padding:10px;text-align:left}
+    td{padding:8px;border-bottom:1px solid #e2e8f0}
+    .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+    .sc{padding:10px;background:#f8fafc;border-radius:5px}
+    .tot{font-size:18px;font-weight:bold;color:#2563eb;margin:20px 0}</style></head><body>
+    <h1>Question Paper Count Report</h1>
+    <div class="sg">
+    {% for subject, count in arrangement.qp_summary.subject_summary.items() %}
+    <div class="sc"><strong>{{ subject }}</strong>: {{ count }}</div>
+    {% endfor %}
+    </div>
+    <div class="tot">Total: {{ arrangement.qp_summary.total_students }}</div>
+    <table><tr><th>Room</th><th>Subject</th><th>Count</th></tr>
+    {% for item in arrangement.qp_summary.room_wise %}
+    <tr><td>{{ item.Room }}</td><td>{{ item.Subject }}</td>
+    <td><strong>{{ item['Student Count'] }}</strong></td></tr>
+    {% endfor %}
+    </table></body></html>`);
+    w.document.close(); w.print();
+}
+</script>
+{% endblock %}

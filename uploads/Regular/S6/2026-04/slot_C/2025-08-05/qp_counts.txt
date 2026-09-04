@@ -1,0 +1,40 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 17 students
+Room1: INFORMATION THEORY AND CODING ( ECT306 ) - 10 students
+Room2: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 18 students
+Room2: DATA SCIENCE ( ITT306 ) - 11 students
+Room3: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 20 students
+Room3: INFORMATION THEORY AND CODING ( ECT306 ) - 10 students
+Room4: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 20 students
+Room4: INFORMATION THEORY AND CODING ( ECT306 ) - 10 students
+Room5: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 19 students
+Room5: DESIGN OF HYDRAULIC STRUCTURES ( CET306 ) - 11 students
+Room6: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 16 students
+Room6: DATA SCIENCE ( ITT306 ) - 14 students
+Room7: INFORMATION THEORY AND CODING ( ECT306 ) - 31 students
+Room8: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 10 students
+Room8: DESIGN OF HYDRAULIC STRUCTURES ( CET306 ) - 19 students
+Room9: DATA SCIENCE ( ITT306 ) - 20 students
+Room9: INFORMATION THEORY AND CODING ( ECT306 ) - 10 students
+Room10: ALGORITHM ANALYSIS AND DESIGN ( CST306 ) - 19 students
+Room10: INFORMATION THEORY AND CODING ( ECT306 ) - 11 students
+Room11: DATA SCIENCE ( ITT306 ) - 11 students
+Room11: DESIGN OF HYDRAULIC STRUCTURES ( CET306 ) - 18 students
+Room12: INFORMATION THEORY AND CODING ( ECT306 ) - 28 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+ALGORITHM ANALYSIS AND DESIGN ( CST306 ): 139 students
+DATA SCIENCE ( ITT306 ): 56 students
+DESIGN OF HYDRAULIC STRUCTURES ( CET306 ): 48 students
+INFORMATION THEORY AND CODING ( ECT306 ): 110 students
+
+Total Students: 353
+============================================================

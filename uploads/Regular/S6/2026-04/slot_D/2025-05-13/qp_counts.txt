@@ -1,0 +1,66 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: Program Elective
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: EC:EMBEDDED SYSTEMS - 19 students
+Room1: CE:ADVANCED CONCRETE TECHNOLOGY - 11 students
+Room2: IT:USER INTERFACE AND USER EXPERIENCE DESIGN - 1 students
+Room2: CE:STRUCTURAL ANALYSIS - 18 students
+Room2: EC:INTRODUCTION TO MEMS - 2 students
+Room2: CSE:PROGRAMMING IN PYTHON - 4 students
+Room2: CSE:FOUNDATIONS OF SECURITY IN COMPUTING - 1 students
+Room3: EC:SENSORS AND ACTUATORS - 20 students
+Room3: IT:USER INTERFACE AND USER EXPERIENCE DESIGN - 10 students
+Room4: EC:DIGITAL SYSTEM DESIGN - 12 students
+Room4: IT:SOFT COMPUTING - 14 students
+Room5: CSE:PROGRAMMING IN PYTHON - 15 students
+Room5: EC:DIGITAL SYSTEM DESIGN - 14 students
+Room5: IT:DISTRIBUTED SYSTEMS - 1 students
+Room6: CSE:PROGRAMMING IN PYTHON - 20 students
+Room6: EC:FOUNDATIONS OF MACHINE LEARNING - 10 students
+Room7: CSE:PROGRAMMING IN PYTHON - 19 students
+Room7: CE:ADVANCED CONCRETE TECHNOLOGY - 10 students
+Room7: EC:OPTOELECTRONIC DEVICES - 2 students
+Room8: CSE:PROGRAMMING IN PYTHON - 20 students
+Room8: EC:EMBEDDED SYSTEMS - 10 students
+Room8: IT:COMPILER DESIGN - 1 students
+Room9: CSE:PROGRAMMING IN PYTHON - 19 students
+Room9: IT:USER INTERFACE AND USER EXPERIENCE DESIGN - 10 students
+Room9: EC:DIGITAL IMAGE PROCESSING - 2 students
+Room10: CSE:FOUNDATIONS OF SECURITY IN COMPUTING - 10 students
+Room10: EC:FOUNDATIONS OF MACHINE LEARNING - 11 students
+Room10: IT:SOFT COMPUTING - 5 students
+Room11: CSE:PROGRAMMING IN PYTHON - 18 students
+Room11: CE:ADVANCED CONCRETE TECHNOLOGY - 7 students
+Room11: IT:WEB TECHNOLOGIES - 5 students
+Room11: EC:BIOMEDICAL INSTRUMENTATION - 1 students
+Room12: CSE:FOUNDATIONS OF SECURITY IN COMPUTING - 18 students
+Room12: EC:SENSORS AND ACTUATORS - 8 students
+Room12: IT:WEB TECHNOLOGIES - 5 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+CE:ADVANCED CONCRETE TECHNOLOGY: 28 students
+CE:STRUCTURAL ANALYSIS: 18 students
+CSE:FOUNDATIONS OF SECURITY IN COMPUTING: 29 students
+CSE:PROGRAMMING IN PYTHON: 115 students
+EC:BIOMEDICAL INSTRUMENTATION: 1 students
+EC:DIGITAL IMAGE PROCESSING: 2 students
+EC:DIGITAL SYSTEM DESIGN: 26 students
+EC:EMBEDDED SYSTEMS: 29 students
+EC:FOUNDATIONS OF MACHINE LEARNING: 21 students
+EC:INTRODUCTION TO MEMS: 2 students
+EC:OPTOELECTRONIC DEVICES: 2 students
+EC:SENSORS AND ACTUATORS: 28 students
+IT:COMPILER DESIGN: 1 students
+IT:DISTRIBUTED SYSTEMS: 1 students
+IT:SOFT COMPUTING: 19 students
+IT:USER INTERFACE AND USER EXPERIENCE DESIGN: 21 students
+IT:WEB TECHNOLOGIES: 10 students
+
+Total Students: 353
+============================================================

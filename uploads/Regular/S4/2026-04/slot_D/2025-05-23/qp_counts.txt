@@ -1,0 +1,23 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room2: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room3: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room4: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room5: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room6: OPERATING SYSTEMS ( CST206 ) - 14 students
+Room7: OPERATING SYSTEMS ( CST206 ) - 20 students
+Room8: OPERATING SYSTEMS ( CST206 ) - 14 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+OPERATING SYSTEMS ( CST206 ): 148 students
+
+Total Students: 148
+============================================================

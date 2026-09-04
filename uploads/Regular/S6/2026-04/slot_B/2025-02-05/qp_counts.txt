@@ -1,0 +1,39 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 20 students
+Room1: VLSI CIRCUIT DESIGN ( ECT304 ) - 11 students
+Room2: ALGORITHM ANALYSIS AND DESIGN ( ITT304 ) - 12 students
+Room2: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 20 students
+Room3: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 18 students
+Room3: VLSI CIRCUIT DESIGN ( ECT304 ) - 14 students
+Room4: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 19 students
+Room4: ENVIRONMENTAL ENGINEERING ( CET304 ) - 12 students
+Room5: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 20 students
+Room5: VLSI CIRCUIT DESIGN ( ECT304 ) - 12 students
+Room6: ALGORITHM ANALYSIS AND DESIGN ( ITT304 ) - 20 students
+Room6: VLSI CIRCUIT DESIGN ( ECT304 ) - 11 students
+Room7: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 18 students
+Room7: ENVIRONMENTAL ENGINEERING ( CET304 ) - 14 students
+Room8: VLSI CIRCUIT DESIGN ( ECT304 ) - 30 students
+Room9: ALGORITHM ANALYSIS AND DESIGN ( ITT304 ) - 11 students
+Room9: ENVIRONMENTAL ENGINEERING ( CET304 ) - 20 students
+Room10: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ) - 20 students
+Room10: VLSI CIRCUIT DESIGN ( ECT304 ) - 12 students
+Room11: ALGORITHM ANALYSIS AND DESIGN ( ITT304 ) - 14 students
+Room11: VLSI CIRCUIT DESIGN ( ECT304 ) - 16 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+ALGORITHM ANALYSIS AND DESIGN ( ITT304 ): 57 students
+COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 ): 135 students
+ENVIRONMENTAL ENGINEERING ( CET304 ): 46 students
+VLSI CIRCUIT DESIGN ( ECT304 ): 106 students
+
+Total Students: 344
+============================================================

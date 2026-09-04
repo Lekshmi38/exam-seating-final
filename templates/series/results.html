@@ -1,0 +1,839 @@
+{% extends "base.html" %}
+
+{% block page_title %}Series Exam Results{% endblock %}
+
+{% block content %}
+<div class="series-results-container">
+    {% if not arrangement %}
+    <div class="alert warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>No arrangement found.</span>
+        <a href="{{ url_for('series_allocation') }}" class="btn btn-primary">Generate New</a>
+    </div>
+    {% else %}
+    <!-- Header -->
+    <div class="sr-header">
+        <h2><i class="fas fa-chair"></i> Series Exam Seating Arrangement</h2>
+        <div class="sr-header-actions">
+            <span class="badge series">Series Exam</span>
+            <button class="btn btn-secondary" onclick="window.print()">
+                <i class="fas fa-print"></i> Print
+            </button>
+            <a href="{{ url_for('series_allocation') }}" class="btn btn-primary">
+                <i class="fas fa-redo"></i> Generate New
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics — uses global .stats-grid / .stat-card from style.css -->
+    <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); margin-bottom:1.75rem;">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-door-open"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.total_rooms }}</span>
+                <span class="stat-label">Total Rooms</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.total_students }}</span>
+                <span class="stat-label">Total Students</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.allocated_students }}</span>
+                <span class="stat-label">Allocated</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-percent"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.utilization }}%</span>
+                <span class="stat-label">Utilization</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.avg_subjects_per_room }}</span>
+                <span class="stat-label">Avg Subjects/Room</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ arrangement.stats.room_difference }}</span>
+                <span class="stat-label">Room Difference</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optimization Metrics -->
+    <div class="sr-metrics card">
+        <h3><i class="fas fa-chart-pie"></i> Optimization Metrics</h3>
+        <div class="sr-metrics-grid">
+            <div class="sr-metric-card">
+                <div class="sr-metric-header"><i class="fas fa-cubes"></i><span>Block Usage</span></div>
+                <div class="sr-metric-value {% if arrangement.stats.get('block_usage',0) >= 90 %}sr-good{% elif arrangement.stats.get('block_usage',0) >= 70 %}sr-avg{% else %}sr-poor{% endif %}">
+                    {{ arrangement.stats.get('block_usage', 0) }}%
+                </div>
+                <div class="sr-progress-bar-wrap">
+                    <div class="sr-progress-bar" style="width:{{ arrangement.stats.get('block_usage',0) }}%"></div>
+                </div>
+            </div>
+
+            <div class="sr-metric-card">
+                <div class="sr-metric-header"><i class="fas fa-book"></i><span>Subjects/Room</span></div>
+                <div class="sr-metric-value">
+                    {{ arrangement.stats.get('min_subjects',0) }}–{{ arrangement.stats.get('max_subjects',0) }}
+                </div>
+                <div class="sr-metric-badge">
+                    {% set min_s = arrangement.stats.get('min_subjects',0) %}
+                    {% set max_s = arrangement.stats.get('max_subjects',0) %}
+                    {% if min_s >= 3 and max_s <= 4 %}
+                    <span class="sr-badge sr-badge-ok">Optimal (3–4)</span>
+                    {% else %}
+                    <span class="sr-badge sr-badge-warn">Suboptimal</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sr-metric-card">
+                <div class="sr-metric-header"><i class="fas fa-door-closed"></i><span>Small Rooms</span></div>
+                <div class="sr-metric-value {% if arrangement.stats.get('small_rooms',0) == 0 %}sr-good{% else %}sr-poor{% endif %}">
+                    {{ arrangement.stats.get('small_rooms', 0) }}
+                </div>
+                <div class="sr-metric-desc">Rooms with ≤10 students</div>
+            </div>
+
+            <div class="sr-metric-card">
+                <div class="sr-metric-header"><i class="fas fa-balance-scale"></i><span>Balance Score</span></div>
+                {% set room_diff = arrangement.stats.get('room_difference',0) %}
+                {% set avg_occ   = arrangement.stats.get('avg_occupancy',1) %}
+                {% if avg_occ > 0 %}
+                    {% set bal = (100 - (room_diff / avg_occ * 100))|round|int %}
+                {% else %}
+                    {% set bal = 0 %}
+                {% endif %}
+                <div class="sr-metric-value">{{ bal }}%</div>
+                <div class="sr-progress-bar-wrap">
+                    <div class="sr-progress-bar" style="width:{{ bal }}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if arrangement.stats.overflow > 0 %}
+    <div class="alert warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>{{ arrangement.stats.overflow }} students could not be accommodated</span>
+    </div>
+    {% endif %}
+
+    <!-- Room Tabs -->
+    <div class="sr-tabs">
+        <button class="sr-tab active" onclick="showAllRooms()">All Rooms</button>
+        {% for room_name in arrangement.rooms.keys()|sort %}
+        <button class="sr-tab" onclick="showRoom('{{ room_name|replace(' ','_') }}', event)">{{ room_name }}</button>
+        {% endfor %}
+    </div>
+
+    <!-- All Rooms View -->
+    <div id="all-rooms-view" class="sr-view active">
+        <div class="sr-rooms-grid">
+            {% for room_name, room_data in arrangement.rooms.items()|sort %}
+            <div class="sr-room-card {% if room_data.total <= 10 %}sr-room-small{% endif %}">
+                <div class="sr-room-head">
+                    <h3>{{ room_name }}</h3>
+                    <span class="sr-room-cap {% if room_data.total / room_data.capacity > 0.9 %}sr-cap-high{% elif room_data.total / room_data.capacity > 0.7 %}sr-cap-med{% else %}sr-cap-low{% endif %}">
+                        {{ room_data.total }}/{{ room_data.capacity }}
+                    </span>
+                </div>
+
+                <div class="sr-room-subjects">
+                    <i class="fas fa-tags"></i>
+                    {% for subject in room_data.subjects %}
+                    <span class="sr-subject-tag">{{ subject }}</span>
+                    {% endfor %}
+                    <span class="sr-subject-count">{{ room_data.subjects|length }} subjects</span>
+                </div>
+
+                <div class="sr-blocks-display">
+                    {% for block_name in ['Left1','Left2','Left3','Middle1','Middle2','Right1','Right2','Right3'] %}
+                    {% if block_name in room_data.blocks %}
+                    <div class="sr-block-item {% if room_data.blocks[block_name].count == 0 %}sr-block-empty{% endif %}">
+                        <div class="sr-block-head">
+                            <span class="sr-block-name">{{ block_name }}</span>
+                            <span class="sr-block-count">{{ room_data.blocks[block_name].count }}/{{ room_data.blocks[block_name].capacity }}</span>
+                        </div>
+                        <div class="sr-block-classes">
+                            {% set classes_in_block = [] %}
+                            {% for student in room_data.blocks[block_name].students %}
+                                {% if student != '--' %}
+                                    {% set cn = student.split('_')[0] %}
+                                    {% if cn not in classes_in_block %}
+                                        {% set classes_in_block = classes_in_block + [cn] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% for cn in classes_in_block %}
+                            <span class="sr-class-badge">{{ cn }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Individual Room Views -->
+    {% for room_name, room_data in arrangement.rooms.items()|sort %}
+    <div id="room-{{ room_name|replace(' ','_') }}" class="sr-view">
+        <div class="sr-detail-head">
+            <button class="btn btn-sm btn-outline" onclick="showAllRooms()">← Back to All Rooms</button>
+            <h3>{{ room_name }} — Detailed Seating</h3>
+        </div>
+
+        <div class="sr-room-info">
+            <div class="sr-info-item"><i class="fas fa-users"></i><span class="sr-info-label">Students:</span><span class="sr-info-val">{{ room_data.total }}/{{ room_data.capacity }}</span></div>
+            <div class="sr-info-item"><i class="fas fa-book"></i><span class="sr-info-label">Subjects:</span><span class="sr-info-val">{{ room_data.subjects|length }}</span></div>
+            <div class="sr-info-item"><i class="fas fa-percent"></i><span class="sr-info-label">Utilization:</span><span class="sr-info-val">{{ (room_data.total / room_data.capacity * 100)|round }}%</span></div>
+        </div>
+
+        <div class="sr-subjects-list">
+            {% for subject in room_data.subjects %}
+            <span class="sr-subject-badge">{{ subject }}</span>
+            {% endfor %}
+        </div>
+
+        <div class="seating-table-wrapper">
+            <table class="sr-seat-table">
+                <thead>
+                    <tr>
+                        <th>Seat</th>
+                        <th>Left1</th><th>Left2</th><th>Left3</th>
+                        <th>Mid1</th><th>Mid2</th>
+                        <th>Right1</th><th>Right2</th><th>Right3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set max_rows = namespace(v=7) %}
+                    {% for block in ['Left1','Left2','Left3','Middle1','Middle2','Right1','Right2','Right3'] %}
+                        {% if room_data.blocks[block].capacity > max_rows.v %}
+                            {% set max_rows.v = room_data.blocks[block].capacity %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for row in range(1, max_rows.v + 1) %}
+                    <tr>
+                        <td class="row-number">{{ row }}</td>
+                        {% for block in ['Left1','Left2','Left3','Middle1','Middle2','Right1','Right2','Right3'] %}
+                        <td class="student-cell">
+                            {% if row <= room_data.blocks[block].students|length %}
+                                {% set student = room_data.blocks[block].students[row-1] %}
+                                {% if student != '--' %}
+                                    {% set parts = student.split('_') %}
+                                    <div class="sr-student-info">
+                                        <span class="sr-student-class">{{ parts[0] }}</span>
+                                        <span class="sr-student-roll">{{ parts[1] if parts|length > 1 else '' }}</span>
+                                    </div>
+                                {% else %}
+                                    <span class="empty-cell">—</span>
+                                {% endif %}
+                            {% else %}
+                                <span class="empty-cell">—</span>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="sr-block-summary">
+            {% for block in ['Left1','Left2','Left3','Middle1','Middle2','Right1','Right2','Right3'] %}
+            <div class="sr-blk-stat {% if room_data.blocks[block].count == 0 %}sr-blk-empty{% endif %}">
+                <span class="sr-blk-label">{{ block }}</span>
+                <span class="sr-blk-val">{{ room_data.blocks[block].count }}/{{ room_data.blocks[block].capacity }}</span>
+                <div class="sr-blk-dots">
+                    {% for i in range(room_data.blocks[block].count) %}
+                    <span class="sr-dot"></span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- QP Summary -->
+    {% if arrangement.qp_summary and arrangement.qp_summary.subject_summary %}
+    <div class="sr-qp-section card">
+        <h3><i class="fas fa-calculator"></i> Question Paper Summary</h3>
+        <div class="sr-qp-grid">
+            {% for subject, count in arrangement.qp_summary.subject_summary.items()|sort %}
+            <div class="sr-qp-card">
+                <span class="sr-qp-subject">{{ subject }}</span>
+                <span class="sr-qp-count">{{ count }}</span>
+            </div>
+            {% endfor %}
+            <div class="sr-qp-card sr-qp-total">
+                <span class="sr-qp-subject">Total</span>
+                <span class="sr-qp-count">{{ arrangement.qp_summary.total_students }}</span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Leftovers -->
+    {% if arrangement.leftovers and arrangement.leftovers.values()|sum > 0 %}
+    <div class="sr-leftover-section card">
+        <h3><i class="fas fa-exclamation-triangle"></i> Unallocated Students</h3>
+        <div class="sr-leftover-grid">
+            {% for class_name, count in arrangement.leftovers.items() %}
+            <div class="sr-leftover-card">
+                <span class="sr-leftover-class">{{ class_name }}</span>
+                <span class="sr-leftover-count">{{ count }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+<style>
+/* ── All rules scoped under .series-results-container ─────────────────────
+   This prevents any conflict with the global style.css.
+   We use sr- prefixed class names throughout so nothing collides.          */
+
+.series-results-container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.series-results-container .sr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.series-results-container .sr-header h2 {
+    font-size: 1.3rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0;
+}
+.series-results-container .sr-header h2 i { color: var(--primary); }
+.series-results-container .sr-header-actions {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+/* ── Metrics card ────────────────────────────────────────────── */
+.series-results-container .sr-metrics { margin-bottom: 1.75rem; }
+.series-results-container .sr-metrics h3 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+.series-results-container .sr-metrics h3 i { color: var(--primary); }
+
+.series-results-container .sr-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.series-results-container .sr-metric-card {
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+}
+
+.series-results-container .sr-metric-header {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-size: .8rem;
+    color: var(--gray-500);
+    margin-bottom: .6rem;
+    font-weight: 600;
+}
+.series-results-container .sr-metric-header i { color: var(--primary); }
+
+.series-results-container .sr-metric-value {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: .4rem;
+}
+.series-results-container .sr-good  { color: var(--success) !important; }
+.series-results-container .sr-avg   { color: var(--warning) !important; }
+.series-results-container .sr-poor  { color: var(--danger)  !important; }
+
+.series-results-container .sr-progress-bar-wrap {
+    height: 6px;
+    background: var(--gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: .4rem;
+}
+.series-results-container .sr-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary));
+    border-radius: var(--radius-full);
+    transition: width .4s;
+}
+
+.series-results-container .sr-metric-badge { margin-top: .4rem; }
+.series-results-container .sr-badge {
+    display: inline-flex;
+    padding: .2rem .65rem;
+    border-radius: var(--radius-full);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.series-results-container .sr-badge-ok   { background: var(--success-soft); color: #065f46; }
+.series-results-container .sr-badge-warn { background: var(--warning-soft);  color: #78350f; }
+.series-results-container .sr-metric-desc { font-size: .72rem; color: var(--gray-400); }
+
+/* ── Room Tabs ───────────────────────────────────────────────── */
+.series-results-container .sr-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--gray-200);
+    overflow-x: auto;
+}
+
+.series-results-container .sr-tab {
+    padding: .4rem .95rem;
+    border: 1.5px solid var(--gray-200);
+    background: var(--white);
+    color: var(--gray-600);
+    cursor: pointer;
+    border-radius: var(--radius-full);
+    font-size: .8rem;
+    font-weight: 600;
+    transition: all .18s;
+    white-space: nowrap;
+}
+.series-results-container .sr-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-50);
+}
+.series-results-container .sr-tab.active {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-blue);
+}
+
+/* ── View toggle ─────────────────────────────────────────────── */
+.series-results-container .sr-view { display: none; animation: fadeIn .25s var(--ease); }
+.series-results-container .sr-view.active { display: block; }
+
+/* ── All-rooms grid ──────────────────────────────────────────── */
+.series-results-container .sr-rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.25rem;
+}
+
+/* ── Room Card ───────────────────────────────────────────────── */
+.series-results-container .sr-room-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem;
+    border: 1.5px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    transition: all .2s;
+}
+.series-results-container .sr-room-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-100);
+}
+.series-results-container .sr-room-small {
+    border-left: 4px solid var(--danger) !important;
+}
+
+.series-results-container .sr-room-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .875rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--gray-100);
+}
+.series-results-container .sr-room-head h3 {
+    margin: 0;
+    font-size: .975rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.series-results-container .sr-room-cap {
+    padding: .2rem .7rem;
+    border-radius: var(--radius-full);
+    font-size: .78rem;
+    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    color: #fff;
+    background: var(--primary);
+}
+.series-results-container .sr-cap-high { background: var(--success); }
+.series-results-container .sr-cap-med  { background: var(--warning); }
+.series-results-container .sr-cap-low  { background: var(--danger);  }
+
+/* ── Room subjects strip ─────────────────────────────────────── */
+.series-results-container .sr-room-subjects {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+    margin-bottom: 1rem;
+    padding: .6rem .75rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-100);
+}
+.series-results-container .sr-room-subjects i { color: var(--primary); font-size: .8rem; flex-shrink: 0; }
+
+.series-results-container .sr-subject-tag {
+    padding: .18rem .6rem;
+    background: var(--white);
+    border-radius: var(--radius-full);
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+}
+
+.series-results-container .sr-subject-count {
+    margin-left: auto;
+    font-size: .7rem;
+    color: var(--gray-400);
+    background: var(--gray-200);
+    padding: .1rem .5rem;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+/* ── Block display grid (8 blocks) ───────────────────────────── */
+.series-results-container .sr-blocks-display {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+}
+
+.series-results-container .sr-block-item {
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    padding: .45rem .5rem;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+}
+.series-results-container .sr-block-empty {
+    background: var(--danger-soft);
+    border-color: #fca5a5;
+}
+
+.series-results-container .sr-block-head { margin-bottom: .35rem; }
+.series-results-container .sr-block-name {
+    display: block;
+    font-size: .62rem;
+    color: var(--gray-500);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.series-results-container .sr-block-count {
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+.series-results-container .sr-block-empty .sr-block-count { color: var(--danger); }
+
+.series-results-container .sr-block-classes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+    justify-content: center;
+    min-height: 1.25rem;
+}
+.series-results-container .sr-class-badge {
+    padding: .1rem .3rem;
+    background: var(--primary-100);
+    color: var(--primary-dark);
+    border-radius: var(--radius-sm);
+    font-size: .58rem;
+    font-weight: 700;
+}
+
+/* ── Individual room detail ──────────────────────────────────── */
+.series-results-container .sr-detail-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.series-results-container .sr-detail-head h3 { margin: 0; font-size: 1rem; color: var(--dark); }
+
+.series-results-container .sr-room-info {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    padding: .875rem 1.25rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    flex-wrap: wrap;
+}
+.series-results-container .sr-info-item {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+.series-results-container .sr-info-item i { color: var(--primary); font-size: .875rem; }
+.series-results-container .sr-info-label { color: var(--gray-500); font-size: .825rem; }
+.series-results-container .sr-info-val { font-weight: 700; color: var(--primary); font-size: .875rem; }
+
+.series-results-container .sr-subjects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+}
+.series-results-container .sr-subject-badge {
+    padding: .25rem .75rem;
+    background: var(--primary-50);
+    color: var(--primary);
+    border-radius: var(--radius-full);
+    font-size: .825rem;
+    font-weight: 600;
+    border: 1px solid var(--primary-100);
+}
+
+/* ── Seating table (detail view) ─────────────────────────────── */
+.series-results-container .sr-seat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .75rem;
+    background: var(--white);
+}
+.series-results-container .sr-seat-table th,
+.series-results-container .sr-seat-table td {
+    padding: .45rem .5rem;
+    text-align: center;
+    border: 1px solid var(--gray-200);
+}
+.series-results-container .sr-seat-table thead tr {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+}
+.series-results-container .sr-seat-table th {
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    white-space: nowrap;
+}
+.series-results-container .sr-seat-table tbody tr:hover td { background: var(--primary-50); }
+
+.series-results-container .sr-student-info {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem .3rem;
+    background: var(--primary-50);
+    border-radius: var(--radius-sm);
+    line-height: 1.2;
+}
+.series-results-container .sr-student-class { font-size: .65rem; font-weight: 700; color: var(--primary); }
+.series-results-container .sr-student-roll  { font-size: .6rem;  color: var(--primary-dark); }
+
+/* ── Block summary strip ─────────────────────────────────────── */
+.series-results-container .sr-block-summary {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: .6rem;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-100);
+}
+.series-results-container .sr-blk-stat { text-align: center; }
+.series-results-container .sr-blk-label {
+    display: block;
+    font-size: .62rem;
+    color: var(--gray-500);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: .2rem;
+}
+.series-results-container .sr-blk-val {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-size: .875rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+.series-results-container .sr-blk-empty .sr-blk-val { color: var(--danger); }
+.series-results-container .sr-blk-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .1rem;
+    justify-content: center;
+    margin-top: .2rem;
+}
+.series-results-container .sr-dot {
+    width: .4rem;
+    height: .4rem;
+    background: var(--primary);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* ── QP Section ──────────────────────────────────────────────── */
+.series-results-container .sr-qp-section { margin-top: 1.75rem; }
+.series-results-container .sr-qp-section h3 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+.series-results-container .sr-qp-section h3 i { color: var(--primary); }
+
+.series-results-container .sr-qp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: .75rem;
+}
+.series-results-container .sr-qp-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem 1rem;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--primary);
+    border-top: 1px solid var(--gray-100);
+    border-right: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+}
+.series-results-container .sr-qp-total {
+    border-left-color: var(--warning);
+    background: var(--warning-soft);
+}
+.series-results-container .sr-qp-subject { font-size: .855rem; font-weight: 500; color: var(--dark); flex: 1; }
+.series-results-container .sr-qp-count {
+    font-family: 'Sora', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    padding: .18rem .65rem;
+    border-radius: var(--radius-full);
+    min-width: 38px;
+    text-align: center;
+}
+.series-results-container .sr-qp-total .sr-qp-count { background: var(--warning); }
+
+/* ── Leftovers ───────────────────────────────────────────────── */
+.series-results-container .sr-leftover-section { margin-top: 1.75rem; }
+.series-results-container .sr-leftover-section h3 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+.series-results-container .sr-leftover-section h3 i { color: var(--warning); }
+
+.series-results-container .sr-leftover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+    gap: .6rem;
+}
+.series-results-container .sr-leftover-card {
+    display: flex;
+    justify-content: space-between;
+    padding: .75rem 1rem;
+    background: var(--danger-soft);
+    border-radius: var(--radius-lg);
+    border-left: 3px solid var(--danger);
+}
+.series-results-container .sr-leftover-class { font-weight: 600; color: #7f1d1d; font-size: .855rem; }
+.series-results-container .sr-leftover-count { font-weight: 800; color: var(--danger); font-family: 'Sora', sans-serif; }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .series-results-container .sr-metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .series-results-container .sr-block-summary { grid-template-columns: repeat(4,1fr); }
+}
+
+@media (max-width: 768px) {
+    .series-results-container .sr-header  { flex-direction: column; align-items: flex-start; }
+    .series-results-container .sr-rooms-grid { grid-template-columns: 1fr; }
+    .series-results-container .sr-blocks-display { grid-template-columns: repeat(4,1fr); }
+    .series-results-container .sr-metrics-grid { grid-template-columns: repeat(2,1fr); }
+    .series-results-container .sr-block-summary { grid-template-columns: repeat(4,1fr); }
+    .series-results-container .sr-tabs { flex-wrap: nowrap; overflow-x: auto; }
+}
+
+@media print {
+    .series-results-container .sr-header-actions,
+    .series-results-container .sr-tabs,
+    .series-results-container .sr-metrics { display: none; }
+    .series-results-container .sr-room-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+</style>
+
+<script>
+function showAllRooms() {
+    document.querySelectorAll('.sr-tab').forEach(b => b.classList.remove('active'));
+    document.querySelector('.sr-tab:first-child').classList.add('active');
+    document.querySelectorAll('.sr-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('all-rooms-view').classList.add('active');
+}
+
+function showRoom(roomId, event) {
+    document.querySelectorAll('.sr-tab').forEach(b => b.classList.remove('active'));
+    if (event && event.target) event.target.classList.add('active');
+    document.querySelectorAll('.sr-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('room-' + roomId).classList.add('active');
+}
+</script>
+{% endblock %}

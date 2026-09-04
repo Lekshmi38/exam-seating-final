@@ -1,0 +1,33 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 18 students
+Room1: DATABASE MANAGEMENT SYSTEMS ( ITT206 ) - 11 students
+Room2: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 19 students
+Room2: TRANSPORTATION ENGINEERING ( CET206 ) - 11 students
+Room3: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 18 students
+Room3: DATABASE MANAGEMENT SYSTEMS ( ITT206 ) - 10 students
+Room4: DATABASE MANAGEMENT SYSTEMS ( ITT206 ) - 10 students
+Room4: TRANSPORTATION ENGINEERING ( CET206 ) - 18 students
+Room5: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 27 students
+Room6: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 10 students
+Room6: DATABASE MANAGEMENT SYSTEMS ( ITT206 ) - 18 students
+Room7: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 13 students
+Room7: TRANSPORTATION ENGINEERING ( CET206 ) - 16 students
+Room8: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ) - 30 students
+Room9: DATABASE MANAGEMENT SYSTEMS ( ITT206 ) - 15 students
+Room9: TRANSPORTATION ENGINEERING ( CET206 ) - 13 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ): 135 students
+DATABASE MANAGEMENT SYSTEMS ( ITT206 ): 64 students
+TRANSPORTATION ENGINEERING ( CET206 ): 58 students
+
+Total Students: 257
+============================================================

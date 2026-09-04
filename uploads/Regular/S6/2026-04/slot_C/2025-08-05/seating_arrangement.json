@@ -1,0 +1,965 @@
+{
+  "rooms": {
+    "Room1": {
+      "total": 27,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT20CS045",
+            "LBT21CS026",
+            "LBT21CS067",
+            "LBT21CS091",
+            "LBT21CS109",
+            "LBT22CS001"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT20EC027",
+            "LBT20EC030",
+            "LBT20EC054",
+            "LBT21EC042",
+            "LBT21EC059"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS002",
+            "LBT22CS003",
+            "LBT22CS004",
+            "LBT22CS005",
+            "LBT22CS006",
+            "LBT22CS007"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LLBT21EC062",
+            "LBT22EC001",
+            "LBT22EC002",
+            "LBT22EC003",
+            "LBT22EC004"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS008",
+            "LBT22CS009",
+            "LBT22CS010",
+            "LBT22CS011",
+            "LBT22CS012"
+          ],
+          "capacity": 7,
+          "count": 5
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7EC: INFORMATION THEORY AND CODING ( ECT306 )"
+      ]
+    },
+    "Room2": {
+      "total": 29,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS013",
+            "LBT22CS014",
+            "LBT22CS015",
+            "LBT22CS016",
+            "LBT22CS017",
+            "LBT22CS018"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT20IT009",
+            "LBT21IT005",
+            "LBT21IT012",
+            "LBT21IT048",
+            "LLBT21IT056",
+            "LLBT21IT058"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS019",
+            "LBT22CS020",
+            "LBT22CS021",
+            "LBT22CS022",
+            "LBT22CS023",
+            "LBT22CS024"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22IT001",
+            "LBT22IT002",
+            "LBT22IT003",
+            "LBT22IT004",
+            "LBT22IT005"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS025",
+            "LBT22CS026",
+            "LBT22CS027",
+            "LBT22CS028",
+            "LBT22CS029",
+            "LBT22CS030"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7IT: DATA SCIENCE ( ITT306 )"
+      ]
+    },
+    "Room3": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS031",
+            "LBT22CS032",
+            "LBT22CS033",
+            "LBT22CS034",
+            "LBT22CS035",
+            "LBT22CS036",
+            "LBT22CS037"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22EC005",
+            "LBT22EC006",
+            "LBT22EC007",
+            "LBT22EC008",
+            "LBT22EC009"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS038",
+            "LBT22CS039",
+            "LBT22CS040",
+            "LBT22CS041",
+            "LBT22CS042",
+            "LBT22CS043"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22EC010",
+            "LBT22EC011",
+            "LBT22EC012",
+            "LBT22EC013",
+            "LBT22EC014"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS044",
+            "LBT22CS045",
+            "LBT22CS046",
+            "LBT22CS047",
+            "LBT22CS048",
+            "LBT22CS049",
+            "LBT22CS050"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7EC: INFORMATION THEORY AND CODING ( ECT306 )"
+      ]
+    },
+    "Room4": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS051",
+            "LBT22CS052",
+            "LBT22CS053",
+            "LBT22CS054",
+            "LBT22CS055",
+            "LBT22CS056",
+            "LBT22CS057"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE001",
+            "LBT22ECE002",
+            "LBT22ECE003",
+            "LBT22ECE004",
+            "LBT22ECE005"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS058",
+            "LBT22CS059",
+            "LBT22CS060",
+            "LBT22CS061",
+            "LBT22CS062",
+            "LBT22CS063"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE006",
+            "LBT22ECE007",
+            "LBT22ECE008",
+            "LBT22ECE009",
+            "LBT22ECE010"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS064",
+            "LBT22CS065",
+            "LBT22CS066",
+            "LBT22CS067",
+            "LBT22CS068",
+            "LBT22CS069",
+            "LBT22CS070"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7ER: DATA COMMUNICATION AND NETWORKING ( ERT306 )"
+      ]
+    },
+    "Room5": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS071",
+            "LBT22CS072",
+            "LBT22CS074",
+            "LBT22CS075",
+            "LBT22CS076",
+            "LBT22CS077",
+            "LBT22CS078"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT21CE042",
+            "LBT21CE056",
+            "LBT22CE001",
+            "LBT22CE002",
+            "LBT22CE003",
+            "LBT22CE004"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS079",
+            "LBT22CS080",
+            "LBT22CS081",
+            "LBT22CS082",
+            "LBT22CS083",
+            "LBT22CS084"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22CE005",
+            "LBT22CE006",
+            "LBT22CE007",
+            "LBT22CE008",
+            "LBT22CE009"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS085",
+            "LBT22CS086",
+            "LBT22CS087",
+            "LBT22CS088",
+            "LBT22CS089",
+            "LBT22CS090"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7CE: DESIGN OF HYDRAULIC STRUCTURES ( CET306 )"
+      ]
+    },
+    "Room6": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS091",
+            "LBT22CS092",
+            "LBT22CS093",
+            "LBT22CS094",
+            "LBT22CS095"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Left3": {
+          "students": [
+            "LBT22IT006",
+            "LBT22IT007",
+            "LBT22IT008",
+            "LBT22IT009",
+            "LBT22IT010",
+            "LBT22IT011",
+            "LBT22IT012"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS096",
+            "LBT22CS097",
+            "LBT22CS099",
+            "LBT22CS100",
+            "LBT22CS101",
+            "LBT22CS102"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22IT013",
+            "LBT22IT014",
+            "LBT22IT015",
+            "LBT22IT016",
+            "LBT22IT017",
+            "LBT22IT018",
+            "LBT22IT019"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS103",
+            "LBT22CS104",
+            "LBT22CS105",
+            "LBT22CS106",
+            "LBT22CS107"
+          ],
+          "capacity": 7,
+          "count": 5
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7IT: DATA SCIENCE ( ITT306 )"
+      ]
+    },
+    "Room7": {
+      "total": 31,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22EC015",
+            "LBT22EC017",
+            "LBT22EC018",
+            "LBT22EC019",
+            "LBT22EC020",
+            "LBT22EC021",
+            "LBT22EC022"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE011",
+            "LBT22ECE012",
+            "LBT22ECE013",
+            "LBT22ECE014",
+            "LBT22ECE015",
+            "LBT22ECE016"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22EC023",
+            "LBT22EC024",
+            "LBT22EC025",
+            "LBT22EC026",
+            "LBT22EC027",
+            "LBT22EC028"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE017",
+            "LBT22ECE018",
+            "LBT22ECE019",
+            "LBT22ECE020",
+            "LBT22ECE021"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22EC029",
+            "LBT22EC030",
+            "LBT22EC031",
+            "LBT22EC032",
+            "LBT22EC033",
+            "LBT22EC034",
+            "LBT22EC035"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7EC: INFORMATION THEORY AND CODING ( ECT306 )",
+        "S7ER: DATA COMMUNICATION AND NETWORKING ( ERT306 )"
+      ]
+    },
+    "Room8": {
+      "total": 29,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CE010",
+            "LBT22CE011",
+            "LBT22CE012",
+            "LBT22CE013",
+            "LBT22CE014",
+            "LBT22CE015",
+            "LBT22CE016"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22CS108",
+            "LBT22CS109",
+            "LBT22CS110",
+            "LBT22CS111",
+            "LBT22CS112"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CE017",
+            "LBT22CE018",
+            "LBT22CE019",
+            "LBT22CE020",
+            "LBT22CE021",
+            "LBT22CE022"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22CS113",
+            "LBT22CS114",
+            "LBT22CS115",
+            "LBT22CS116",
+            "LBT22CS117"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CE023",
+            "LBT22CE024",
+            "LBT22CE025",
+            "LBT22CE026",
+            "LBT22CE027",
+            "LBT22CE028"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7CE: DESIGN OF HYDRAULIC STRUCTURES ( CET306 )"
+      ]
+    },
+    "Room9": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22IT020",
+            "LBT22IT021",
+            "LBT22IT022",
+            "LBT22IT023",
+            "LBT22IT024",
+            "LBT22IT025",
+            "LBT22IT026"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE022",
+            "LBT22ECE023",
+            "LBT22ECE024",
+            "LBT22ECE025",
+            "LBT22ECE026"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22IT027",
+            "LBT22IT028",
+            "LBT22IT029",
+            "LBT22IT030",
+            "LBT22IT031",
+            "LBT22IT032"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE027",
+            "LBT22ECE028",
+            "LBT22ECE029",
+            "LBT22ECE030",
+            "LBT22ECE031"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22IT033",
+            "LBT22IT034",
+            "LBT22IT035",
+            "LBT22IT036",
+            "LBT22IT037",
+            "LBT22IT038",
+            "LBT22IT039"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7ER: DATA COMMUNICATION AND NETWORKING ( ERT306 )",
+        "S7IT: DATA SCIENCE ( ITT306 )"
+      ]
+    },
+    "Room10": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS118",
+            "LBT22CS119",
+            "LBT22CS120",
+            "LBT22CS121",
+            "LBT22CS122",
+            "LBT22CS123",
+            "LBT22CS124"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22EC036",
+            "LBT22EC037",
+            "LBT22EC038",
+            "LBT22EC039",
+            "LBT22EC040",
+            "LBT22EC041"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS125",
+            "LBT22CS126",
+            "LBT22CS127",
+            "LLBT22CS128",
+            "LLBT22CS129",
+            "LLBT22CS130"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22EC042",
+            "LBT22EC043",
+            "LBT22EC044",
+            "LBT22EC045",
+            "LBT22EC046"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LLBT22CS131",
+            "LLBT22CS132",
+            "LLBT22CS133",
+            "LLBT22CS134",
+            "LLBT22CS135",
+            "LLBT22CS136"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "S7EC: INFORMATION THEORY AND CODING ( ECT306 )"
+      ]
+    },
+    "Room11": {
+      "total": 29,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CE029",
+            "LBT22CE030",
+            "LBT22CE032",
+            "LBT22CE033",
+            "LBT22CE034",
+            "LLBT22CE035"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT22IT040",
+            "LBT22IT041",
+            "LBT22IT042",
+            "LBT22IT043",
+            "LBT22IT044",
+            "LBT22IT045"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LLBT22CE036",
+            "LLBT22CE037",
+            "LLBT22CE038",
+            "LLBT22CE039",
+            "LLBT22CE040",
+            "LLBT22CE041"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LLBT22IT046",
+            "LLBT22IT047",
+            "LLBT22IT048",
+            "LLBT22IT049",
+            "LLBT22IT050"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LLBT22CE042",
+            "LLBT22CE043",
+            "LLBT22CE044",
+            "LLBT22CE045",
+            "LLBT22CE046",
+            "LLBT22CE047"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CE: DESIGN OF HYDRAULIC STRUCTURES ( CET306 )",
+        "S7IT: DATA SCIENCE ( ITT306 )"
+      ]
+    },
+    "Room12": {
+      "total": 28,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22ECE032",
+            "LBT22ECE033",
+            "LBT22ECE034",
+            "LBT22ECE035",
+            "LBT22ECE036",
+            "LBT22ECE037"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LLBT22EC047",
+            "LLBT22EC048",
+            "LLBT22EC049",
+            "LLBT22EC050",
+            "LLBT22EC051"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Middle2": {
+          "students": [
+            "LBT22ECE038",
+            "LBT22ECE039",
+            "LBT22ECE040",
+            "LBT22ECE041",
+            "LBT22ECE042",
+            "LBT22ECE043"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LLBT22EC052",
+            "LLBT22EC053",
+            "LLBT22EC054",
+            "LLBT22EC055",
+            "LLBT22EC056"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22ECE044",
+            "LBT22ECE045",
+            "LBT22ECE046",
+            "LLBT22ECE047",
+            "LLBT22ECE048",
+            "LLBT22ECE049"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7EC: INFORMATION THEORY AND CODING ( ECT306 )",
+        "S7ER: DATA COMMUNICATION AND NETWORKING ( ERT306 )"
+      ]
+    }
+  },
+  "summary": {
+    "total_rooms": 12,
+    "best_leftovers": 0,
+    "best_difference": 4,
+    "target_difference": 4,
+    "average": 29.416666666666668,
+    "min": 27,
+    "max": 31,
+    "actual_difference": 4
+  },
+  "student_count": 353,
+  "branch_subject_map": {
+    "S7CE": "DESIGN OF HYDRAULIC STRUCTURES ( CET306 )",
+    "S7CSE": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+    "S7EC": "INFORMATION THEORY AND CODING ( ECT306 )",
+    "S7ER": "DATA COMMUNICATION AND NETWORKING ( ERT306 )",
+    "S7IT": "DATA SCIENCE ( ITT306 )"
+  },
+  "elective_type": "general",
+  "qp_summary": {
+    "room_wise": [
+      {
+        "Room": "Room1",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 17
+      },
+      {
+        "Room": "Room1",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 10
+      },
+      {
+        "Room": "Room2",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 18
+      },
+      {
+        "Room": "Room2",
+        "Subject": "DATA SCIENCE ( ITT306 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room3",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room3",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 10
+      },
+      {
+        "Room": "Room4",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room4",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 10
+      },
+      {
+        "Room": "Room5",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 19
+      },
+      {
+        "Room": "Room5",
+        "Subject": "DESIGN OF HYDRAULIC STRUCTURES ( CET306 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room6",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 16
+      },
+      {
+        "Room": "Room6",
+        "Subject": "DATA SCIENCE ( ITT306 )",
+        "Student Count": 14
+      },
+      {
+        "Room": "Room7",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 31
+      },
+      {
+        "Room": "Room8",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 10
+      },
+      {
+        "Room": "Room8",
+        "Subject": "DESIGN OF HYDRAULIC STRUCTURES ( CET306 )",
+        "Student Count": 19
+      },
+      {
+        "Room": "Room9",
+        "Subject": "DATA SCIENCE ( ITT306 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room9",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 10
+      },
+      {
+        "Room": "Room10",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( CST306 )",
+        "Student Count": 19
+      },
+      {
+        "Room": "Room10",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room11",
+        "Subject": "DATA SCIENCE ( ITT306 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room11",
+        "Subject": "DESIGN OF HYDRAULIC STRUCTURES ( CET306 )",
+        "Student Count": 18
+      },
+      {
+        "Room": "Room12",
+        "Subject": "INFORMATION THEORY AND CODING ( ECT306 )",
+        "Student Count": 28
+      }
+    ],
+    "subject_summary": {
+      "ALGORITHM ANALYSIS AND DESIGN ( CST306 )": 139,
+      "INFORMATION THEORY AND CODING ( ECT306 )": 110,
+      "DATA SCIENCE ( ITT306 )": 56,
+      "DESIGN OF HYDRAULIC STRUCTURES ( CET306 )": 48
+    },
+    "total_students": 353
+  }
+}

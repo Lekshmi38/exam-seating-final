@@ -1,0 +1,503 @@
+{
+  "rooms": {
+    "Room1": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT20CS045",
+            "LBT20CS070",
+            "LBT21CS106",
+            "LBT21CS121",
+            "LLBT21CS132",
+            "LBT22CS121",
+            "LBT23CS001"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS002",
+            "LBT23CS003",
+            "LBT23CS004",
+            "LBT23CS005",
+            "LBT23CS006",
+            "LBT23CS007"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS008",
+            "LBT23CS009",
+            "LBT23CS010",
+            "LBT23CS011",
+            "LBT23CS012",
+            "LBT23CS013",
+            "LBT23CS014"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room2": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS015",
+            "LBT23CS016",
+            "LBT23CS017",
+            "LBT23CS018",
+            "LBT23CS019",
+            "LBT23CS020",
+            "LBT23CS021"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS022",
+            "LBT23CS023",
+            "LBT23CS024",
+            "LBT23CS025",
+            "LBT23CS026",
+            "LBT23CS027"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS028",
+            "LBT23CS029",
+            "LBT23CS030",
+            "LBT23CS031",
+            "LBT23CS032",
+            "LBT23CS033",
+            "LBT23CS034"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room3": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS035",
+            "LBT23CS036",
+            "LBT23CS037",
+            "LBT23CS038",
+            "LBT23CS039",
+            "LBT23CS040",
+            "LBT23CS041"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS042",
+            "LBT23CS043",
+            "LBT23CS044",
+            "LBT23CS045",
+            "LBT23CS046",
+            "LBT23CS047"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS048",
+            "LBT23CS049",
+            "LBT23CS050",
+            "LBT23CS051",
+            "LBT23CS052",
+            "LBT23CS053",
+            "LBT23CS054"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room4": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS055",
+            "LBT23CS056",
+            "LBT23CS057",
+            "LBT23CS058",
+            "LBT23CS059",
+            "LBT23CS060",
+            "LBT23CS061"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS062",
+            "LBT23CS063",
+            "LBT23CS064",
+            "LBT23CS065",
+            "LBT23CS066",
+            "LBT23CS067"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS068",
+            "LBT23CS069",
+            "LBT23CS070",
+            "LBT23CS071",
+            "LBT23CS072",
+            "LBT23CS073",
+            "LBT23CS074"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room5": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS075",
+            "LBT23CS076",
+            "LBT23CS077",
+            "LBT23CS078",
+            "LBT23CS080",
+            "LBT23CS081",
+            "LBT23CS083"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS084",
+            "LBT23CS085",
+            "LBT23CS086",
+            "LBT23CS087",
+            "LBT23CS088",
+            "LBT23CS089"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS090",
+            "LBT23CS091",
+            "LBT23CS092",
+            "LBT23CS093",
+            "LBT23CS094",
+            "LBT23CS095",
+            "LBT23CS096"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room6": {
+      "total": 14,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS097",
+            "LBT23CS098",
+            "LBT23CS099",
+            "LBT23CS100",
+            "LBT23CS101"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS102",
+            "LBT23CS103",
+            "LBT23CS104",
+            "LBT23CS105",
+            "LBT23CS106",
+            "LBT23CS107"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS108",
+            "LBT23CS109",
+            "LBT23CS110"
+          ],
+          "capacity": 7,
+          "count": 3
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room7": {
+      "total": 20,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS111",
+            "LBT23CS112",
+            "LBT23CS113",
+            "LBT23CS114",
+            "LBT23CS115",
+            "LBT23CS116",
+            "LBT23CS117"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LBT23CS118",
+            "LBT23CS119",
+            "LBT23CS120",
+            "LBT23CS121",
+            "LBT23CS122",
+            "LBT23CS123"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LBT23CS124",
+            "LBT23CS125",
+            "LBT23CS126",
+            "LBT23CS127",
+            "LBT23CS128",
+            "LBT23CS129",
+            "LBT23CS130"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    },
+    "Room8": {
+      "total": 14,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT23CS131",
+            "LBT23CS132",
+            "LLBT23CS133",
+            "LLBT23CS134"
+          ],
+          "capacity": 7,
+          "count": 4
+        },
+        "Left3": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Middle2": {
+          "students": [
+            "LLBT23CS135",
+            "LLBT23CS136",
+            "LLBT23CS137",
+            "LLBT23CS138",
+            "LLBT23CS139",
+            "LLBT23CS140"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [],
+          "capacity": 7,
+          "count": 0
+        },
+        "Right3": {
+          "students": [
+            "LLBT23CS141",
+            "LLBT23CS142",
+            "LLBT23CS143",
+            "LLBT23CS144"
+          ],
+          "capacity": 7,
+          "count": 4
+        }
+      },
+      "subjects": [
+        "S7CSE: OPERATING SYSTEMS ( CST206 )"
+      ]
+    }
+  },
+  "summary": {
+    "total_rooms": 8,
+    "best_leftovers": 0,
+    "best_difference": 6,
+    "target_difference": 4,
+    "average": 18.5,
+    "min": 14,
+    "max": 20,
+    "actual_difference": 6
+  },
+  "student_count": 148,
+  "branch_subject_map": {
+    "S7CSE": "OPERATING SYSTEMS ( CST206 )"
+  },
+  "elective_type": "general",
+  "qp_summary": {
+    "room_wise": [
+      {
+        "Room": "Room1",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room2",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room3",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room4",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room5",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room6",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 14
+      },
+      {
+        "Room": "Room7",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room8",
+        "Subject": "OPERATING SYSTEMS ( CST206 )",
+        "Student Count": 14
+      }
+    ],
+    "subject_summary": {
+      "OPERATING SYSTEMS ( CST206 )": 148
+    },
+    "total_students": 148
+  }
+}

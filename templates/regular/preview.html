@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h2><i class="fas fa-eye"></i> Preview Files</h2>
+        <span class="badge regular">Regular Exam</span>
+    </div>
+
+    {% if not session.get('exam_type') or session.exam_type != 'Regular' %}
+    <div class="alert warning">
+        <i class="fas fa-exclamation-triangle"></i> Please select Regular exam from dashboard first.
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Dashboard</a>
+    </div>
+    {% else %}
+    <div class="card">
+        <form method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Semester</label>
+                    <select name="semester" required>
+                        <option value="">Select Semester</option>
+                        {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}
+                        <option value="{{ sem }}">{{ sem }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Month-Year</label>
+                    <input type="month" name="month_year" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Find Files</button>
+        </form>
+    </div>
+
+    {% if request.method == 'POST' and slot_folders %}
+    <div class="files-section">
+        <div class="section-header">
+            <h3>{{ semester }} - {{ month_year }}</h3>
+            {% if excel_files_found or pdf_files_found %}
+            <div class="files-notice">
+                <i class="fas fa-file"></i> Seating arrangement files are available for preview
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="files-grid">
+            {% if master_file_exists %}
+            <div class="file-card">
+                <h4>
+                    <i class="fas fa-list"></i> Master File
+                </h4>
+                <div class="file-item">
+                    <span class="file-info">
+                        <i class="fas fa-file-excel"></i>
+                        Master_Sorted_List.xlsx
+                    </span>
+                    <div class="file-actions">
+                        <a href="{{ url_for('download_master', exam_type=session.exam_type, semester=semester, month_year=month_year) }}"
+                           class="btn-icon" title="Download">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% for slot in slot_folders %}
+            <div class="file-card slot-card">
+                <h4>
+                    <i class="fas fa-door-open"></i> Slot {{ slot.name }}
+                </h4>
+
+                <div class="date-tabs">
+                    {% for date in slot.date_folders %}
+                    <div class="date-tab">
+                        <div class="date-header" onclick="toggleDate('{{ slot.name }}-{{ loop.index }}')">
+                            <i class="fas fa-calendar-day"></i>
+                            <span>{{ date.date.replace('-', '.') }}</span>
+                            <span class="file-count">{{ date.files|length }} file(s)</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+
+                        <div class="date-content" id="date-{{ slot.name }}-{{ loop.index }}">
+                            <div class="file-list">
+                                {% for file in date.files %}
+                                <div class="file-item {% if file.type == 'pdf_master' %}file-item--master{% endif %}">
+                                    <span class="file-info">
+                                        {% if file.type == 'pdf_master' %}
+                                        <i class="fas fa-file-pdf" style="color:#e74c3c;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        <span class="badge-master">MASTER</span>
+                                        {% elif file.type == 'pdf' %}
+                                        <i class="fas fa-file-pdf" style="color:#e74c3c;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% elif file.type == 'pdf_qp' %}
+                                        <i class="fas fa-file-pdf" style="color:#f39c12;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% elif file.type == 'excel_output' %}
+                                        <i class="fas fa-file-excel" style="color:#27ae60;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% elif file.type == 'xlsx' %}
+                                        <i class="fas fa-file-excel" style="color:#27ae60;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% elif file.type == 'txt' %}
+                                        <i class="fas fa-file-alt" style="color:#7f8c8d;"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% else %}
+                                        <i class="fas fa-file"></i>
+                                        <span class="file-name">{{ file.name }}</span>
+                                        {% endif %}
+
+                                        {% if file.size %}
+                                        <small class="file-size">({{ (file.size / 1024)|round(1) }} KB)</small>
+                                        {% endif %}
+                                    </span>
+
+                                    <div class="file-actions">
+                                        {% if file.type in ['pdf', 'pdf_qp', 'pdf_master'] %}
+                                        <a href="{{ url_for('view_pdf', exam_type=session.exam_type, semester=semester, month_year=month_year, slot=slot.name, date=date.date, filename=file.name) }}"
+                                           class="btn-icon {% if file.type == 'pdf_master' %}btn-icon--master{% endif %}"
+                                           title="View"
+                                           target="_blank">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {% elif file.type in ['excel_output', 'xlsx'] %}
+                                        <a href="{{ url_for('view_excel', exam_type=session.exam_type, semester=semester, month_year=month_year, slot=slot.name, date=date.date, filename=file.name) }}"
+                                           class="btn-icon"
+                                           title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        {% endif %}
+                                        <a href="{{ url_for('download_file', exam_type=session.exam_type, semester=semester, month_year=month_year, slot=slot.name, date=date.date, filename=file.name) }}"
+                                           class="btn-icon"
+                                           title="Download">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not slot_folders %}
+        <div class="alert info">
+            <i class="fas fa-info-circle"></i> No slot folders found for {{ semester }} - {{ month_year }}.
+            Please upload a master file first.
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+<script>
+function toggleDate(id) {
+    const content = document.getElementById('date-' + id);
+    const icon = content.previousElementSibling.querySelector('.toggle-icon');
+
+    if (content.classList.contains('active')) {
+        content.classList.remove('active');
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        content.classList.add('active');
+        icon.style.transform = 'rotate(180deg)';
+    }
+}
+
+// Auto-expand first date for each slot
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.date-content').forEach((content, index) => {
+        if (index < 2) { // Expand first date of first two slots
+            content.classList.add('active');
+            const icon = content.previousElementSibling.querySelector('.toggle-icon');
+            if (icon) icon.style.transform = 'rotate(180deg)';
+        }
+    });
+});
+</script>
+{% endblock %}

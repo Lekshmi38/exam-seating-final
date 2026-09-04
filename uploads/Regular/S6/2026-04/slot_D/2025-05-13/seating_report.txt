@@ -1,0 +1,228 @@
+================================================================================
+AUTOMATED SEATING ARRANGEMENT REPORT
+Elective Type: Program Elective
+================================================================================
+
+QUESTION PAPER COUNT SUMMARY
+----------------------------------------
+EC:EMBEDDED SYSTEMS: 29 students
+CE:ADVANCED CONCRETE TECHNOLOGY: 28 students
+IT:USER INTERFACE AND USER EXPERIENCE DESIGN: 21 students
+CE:STRUCTURAL ANALYSIS: 18 students
+EC:INTRODUCTION TO MEMS: 2 students
+CSE:PROGRAMMING IN PYTHON: 115 students
+CSE:FOUNDATIONS OF SECURITY IN COMPUTING: 29 students
+EC:SENSORS AND ACTUATORS: 28 students
+EC:DIGITAL SYSTEM DESIGN: 26 students
+IT:SOFT COMPUTING: 19 students
+IT:DISTRIBUTED SYSTEMS: 1 students
+EC:FOUNDATIONS OF MACHINE LEARNING: 21 students
+EC:OPTOELECTRONIC DEVICES: 2 students
+IT:COMPILER DESIGN: 1 students
+EC:DIGITAL IMAGE PROCESSING: 2 students
+IT:WEB TECHNOLOGIES: 10 students
+EC:BIOMEDICAL INSTRUMENTATION: 1 students
+Total Students: 353
+
+================================================================================
+
+================================================================================
+ Room1 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22EC031      | LBT22CE001      | LBT22EC042      | LBT22CE008      | LLBT22EC051     |
+2     | LBT22EC032      | LBT22CE002      | LBT22EC043      | LBT22CE009      | LLBT22EC052     |
+3     | LBT22EC034      | LBT22CE003      | LBT22EC044      | LBT22CE010      | LLBT22EC053     |
+4     | LBT22EC036      | LBT22CE004      | LLBT22EC047     | LBT22CE011      | LLBT22EC054     |
+5     | LBT22EC039      | LBT22CE005      | LLBT22EC049     | --              | LLBT22EC055     |
+6     | LBT22EC040      | LBT22CE006      | LLBT22EC050     | --              | LLBT22EC056     |
+7     | LBT22EC041      | LBT22CE007      |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 4/7, Right3: 6/7
+Subjects: EC:EMBEDDED SYSTEMS, CE:ADVANCED CONCRETE TECHNOLOGY
+
+================================================================================
+ Room2 | TOTAL: 26 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22IT041      | LBT21EC059      | LLBT22CE036     | LBT22CS018      | LLBT22CE042     |
+2     | LBT22CE029      | LLBT21EC062     | LLBT22CE037     | --              | LLBT22CE043     |
+3     | LBT22CE030      | LBT21CS090      | LLBT22CE038     | --              | LLBT22CE044     |
+4     | LBT22CE032      | LBT22CS104      | LLBT22CE039     | --              | LLBT22CE045     |
+5     | LBT22CE033      | LBT22CS031      | LLBT22CE040     | --              | LLBT22CE046     |
+6     | LBT22CE034      | LBT21CS067      | LLBT22CE041     | --              | LLBT22CE047     |
+7     | LLBT22CE035     | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 6/7, Middle2: 6/6, Right1: 1/7, Right3: 6/7
+Subjects: CSE:PROGRAMMING IN PYTHON, CSE:FOUNDATIONS OF SECURITY IN COMPUTING, EC:INTRODUCTION TO MEMS, IT:USER INTERFACE AND USER EXPERIENCE DESIGN, CE:STRUCTURAL ANALYSIS
+
+================================================================================
+ Room3 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22ECE006     | LBT22IT019      | LBT22ECE015     | LBT22IT035      | LBT22ECE026     |
+2     | LBT22ECE008     | LBT22IT020      | LBT22ECE017     | LBT22IT036      | LBT22ECE027     |
+3     | LBT22ECE010     | LBT22IT022      | LBT22ECE018     | LBT22IT039      | LBT22ECE033     |
+4     | LBT22ECE011     | LBT22IT025      | LBT22ECE020     | --              | LBT22ECE034     |
+5     | LBT22ECE012     | LBT22IT026      | LBT22ECE022     | --              | LBT22ECE035     |
+6     | LBT22ECE013     | LBT22IT027      | LBT22ECE023     | --              | LBT22ECE036     |
+7     | LBT22ECE014     | LBT22IT030      |                 | --              | LBT22ECE039     |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 3/7, Right3: 7/7
+Subjects: EC:SENSORS AND ACTUATORS, IT:USER INTERFACE AND USER EXPERIENCE DESIGN
+
+================================================================================
+ Room4 | TOTAL: 26 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22EC021      | LBT22IT003      | LBT22EC037      | LBT22IT018      | --              |
+2     | LBT22EC022      | LBT22IT004      | LBT22EC038      | LBT22IT021      | --              |
+3     | LBT22EC026      | LBT22IT006      | LBT22EC045      | LBT22IT023      | --              |
+4     | LBT22EC029      | LBT22IT007      | LBT22EC046      | LBT22IT024      | --              |
+5     | LBT22EC030      | LBT22IT010      | LLBT22EC048     | LBT22IT028      | --              |
+6     | LBT22EC033      | LBT22IT011      | --              | LBT22IT029      | --              |
+7     | LBT22EC035      | LBT22IT014      |                 | LBT22IT031      | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 5/6, Right1: 7/7, Right3: 0/7
+Subjects: EC:DIGITAL SYSTEM DESIGN, IT:SOFT COMPUTING
+
+================================================================================
+ Room5 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS122      | LBT22EC002      | LLBT22CS129     | LBT22EC011      | LLBT22CS135     |
+2     | LBT22CS123      | LBT22EC004      | LLBT22CS130     | LBT22EC012      | LLBT22CS136     |
+3     | LBT22CS124      | LBT22EC006      | LLBT22CS131     | LBT22EC013      | LBT19IT025      |
+4     | LBT22CS125      | LBT22EC007      | LLBT22CS132     | LBT22EC014      | --              |
+5     | LBT22CS126      | LBT22EC008      | LLBT22CS133     | LBT22EC015      | --              |
+6     | LLBT19CS126     | LBT22EC009      | LLBT22CS134     | LBT22EC017      | --              |
+7     | LLBT22CS128     | LBT22EC010      |                 | LBT22EC020      | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 7/7, Right3: 3/7
+Subjects: EC:DIGITAL SYSTEM DESIGN, IT:DISTRIBUTED SYSTEMS, CSE:PROGRAMMING IN PYTHON
+
+================================================================================
+ Room6 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS048      | LBT22ECE001     | LBT22CS056      | LBT22ECE016     | LBT22CS062      |
+2     | LBT22CS049      | LBT22ECE002     | LBT22CS057      | LBT22ECE019     | LBT22CS063      |
+3     | LBT22CS051      | LBT22ECE003     | LBT22CS058      | LBT22ECE021     | LBT22CS064      |
+4     | LBT22CS052      | LBT22ECE004     | LBT22CS059      | --              | LBT22CS065      |
+5     | LBT22CS053      | LBT22ECE005     | LBT22CS060      | --              | LBT22CS066      |
+6     | LBT22CS054      | LBT22ECE007     | LBT22CS061      | --              | LBT22CS067      |
+7     | LBT22CS055      | LBT22ECE009     |                 | --              | LBT22CS069      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 3/7, Right3: 7/7
+Subjects: EC:FOUNDATIONS OF MACHINE LEARNING, CSE:PROGRAMMING IN PYTHON
+
+================================================================================
+ Room7 | TOTAL: 31 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS094      | LBT22CE012      | LBT22CS105      | LBT22CE019      | LBT22CS115      |
+2     | LBT22CS095      | LBT22CE013      | LBT22CS106      | LBT22CE020      | LBT22CS116      |
+3     | LBT22CS096      | LBT22CE014      | LBT22CS109      | LBT22CE021      | LBT22CS117      |
+4     | LBT22CS097      | LBT22CE015      | LBT22CS110      | LBT21AE002      | LBT22CS118      |
+5     | LBT22CS101      | LBT22CE016      | LBT22CS111      | LBT21AE012      | LBT22CS119      |
+6     | LBT22CS102      | LBT22CE017      | LBT22CS112      | --              | LBT22CS120      |
+7     | --              | LBT22CE018      |                 | --              | LBT22CS121      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 7/7, Middle2: 6/6, Right1: 5/7, Right3: 7/7
+Subjects: CE:ADVANCED CONCRETE TECHNOLOGY, CSE:PROGRAMMING IN PYTHON, EC:OPTOELECTRONIC DEVICES
+
+================================================================================
+ Room8 | TOTAL: 31 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS071      | LBT22EC001      | LBT22CS079      | LBT22EC025      | LBT22CS086      |
+2     | LBT22CS072      | LBT22EC003      | LBT22CS080      | LBT22EC027      | LBT22CS087      |
+3     | LBT22CS074      | LBT22EC005      | LBT22CS081      | LBT22EC028      | LBT22CS088      |
+4     | LBT22CS075      | LBT22EC018      | LBT22CS082      | LBT20IT009      | LBT22CS089      |
+5     | LBT22CS076      | LBT22EC019      | LBT22CS083      | --              | LBT22CS090      |
+6     | LBT22CS077      | LBT22EC023      | LBT22CS084      | --              | LBT22CS091      |
+7     | LBT22CS078      | LBT22EC024      |                 | --              | LBT22CS093      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 4/7, Right3: 7/7
+Subjects: EC:EMBEDDED SYSTEMS, IT:COMPILER DESIGN, CSE:PROGRAMMING IN PYTHON
+
+================================================================================
+ Room9 | TOTAL: 31 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS022      | LBT22IT001      | LBT22CS032      | LBT22IT015      | LBT22CS040      |
+2     | LBT22CS023      | LBT22IT002      | LBT22CS033      | LBT22IT016      | LBT22CS041      |
+3     | LBT22CS024      | LBT22IT005      | LBT22CS034      | LBT22IT017      | LBT22CS042      |
+4     | LBT22CS026      | LBT22IT008      | LBT22CS035      | LBT20EC027      | LBT22CS043      |
+5     | LBT22CS028      | LBT22IT009      | LBT22CS036      | LBT20EC054      | LBT22CS044      |
+6     | LBT22CS030      | LBT22IT012      | LBT22CS038      | --              | LBT22CS045      |
+7     | --              | LBT22IT013      |                 | --              | LBT22CS047      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 7/7, Middle2: 6/6, Right1: 5/7, Right3: 7/7
+Subjects: IT:USER INTERFACE AND USER EXPERIENCE DESIGN, CSE:PROGRAMMING IN PYTHON, EC:DIGITAL IMAGE PROCESSING
+
+================================================================================
+ Room10 | TOTAL: 26 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS092      | LBT22ECE024     | LBT22CS114      | LBT22ECE037     | LBT22IT042      |
+2     | LBT22CS099      | LBT22ECE025     | LBT22CS127      | LBT22ECE038     | LBT22CS017      |
+3     | LBT22CS100      | LBT22ECE028     | LBT22IT032      | LBT22ECE044     | --              |
+4     | LBT22CS103      | LBT22ECE029     | LBT22IT033      | LLBT22ECE049    | --              |
+5     | LBT22CS107      | LBT22ECE030     | LBT22IT034      | --              | --              |
+6     | LBT22CS108      | LBT22ECE031     | LBT22IT040      | --              | --              |
+7     | LBT22CS113      | LBT22ECE032     |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 7/7, Middle2: 6/6, Right1: 4/7, Right3: 2/7
+Subjects: IT:SOFT COMPUTING, EC:FOUNDATIONS OF MACHINE LEARNING, CSE:FOUNDATIONS OF SECURITY IN COMPUTING
+
+================================================================================
+ Room11 | TOTAL: 31 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT19CS037      | LBT22CE022      | LBT21CS091      | LLBT22IT046     | LBT22CS007      |
+2     | LBT20CS008      | LBT22CE023      | LBT21CS109      | LLBT22IT047     | LBT22CS008      |
+3     | LBT20CS045      | LBT22CE024      | LBT22CS002      | LLBT22IT048     | LBT22CS009      |
+4     | LBT20CS076      | LBT22CE025      | LBT22CS004      | LLBT22IT049     | LBT22CS010      |
+5     | LBT21CS026      | LBT22CE026      | LBT22CS005      | LLBT22IT050     | LBT22CS011      |
+6     | --              | LBT22CE027      | LBT22CS006      | LBT20AE005      | LBT22CS012      |
+7     | --              | LBT22CE028      |                 | --              | LBT22CS013      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 5/7, Left3: 7/7, Middle2: 6/6, Right1: 6/7, Right3: 7/7
+Subjects: IT:WEB TECHNOLOGIES, CE:ADVANCED CONCRETE TECHNOLOGY, EC:BIOMEDICAL INSTRUMENTATION, CSE:PROGRAMMING IN PYTHON
+
+================================================================================
+ Room12 | TOTAL: 31 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22CS001      | LBT22ECE040     | LBT22CS019      | LLBT22ECE048    | LBT22CS037      |
+2     | LBT22CS003      | LBT22ECE041     | LBT22CS020      | LBT22IT037      | LBT22CS039      |
+3     | LBT22CS014      | LBT22ECE042     | LBT22CS021      | LBT22IT038      | LBT22CS046      |
+4     | LBT22CS015      | LBT22ECE043     | LBT22CS025      | LBT22IT043      | LBT22CS050      |
+5     | LBT22CS016      | LBT22ECE045     | LBT22CS027      | LBT22IT044      | LBT22CS068      |
+6     | --              | LBT22ECE046     | LBT22CS029      | LBT22IT045      | LBT22CS070      |
+7     | --              | LLBT22ECE047    |                 | --              | LBT22CS085      |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 5/7, Left3: 7/7, Middle2: 6/6, Right1: 6/7, Right3: 7/7
+Subjects: EC:SENSORS AND ACTUATORS, IT:WEB TECHNOLOGIES, CSE:FOUNDATIONS OF SECURITY IN COMPUTING
+
+================================================================================
+SUMMARY
+================================================================================
+Total Rooms: 12
+Total Students: 353
+Average per Room: 29.4
+Leftover Students: 0
+Max Room Difference: 5

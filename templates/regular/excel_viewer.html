@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h2><i class="fas fa-file-excel"></i> Excel Viewer</h2>
+        <div class="header-actions">
+            <a href="{{ url_for('regular_preview') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Preview
+            </a>
+            <a href="{{ url_for('download_file', exam_type=session.exam_type, semester=metadata.semester, month_year=request.args.get('month_year') or metadata.semester, slot=metadata.slot, date=metadata.exam_date.split()[0] if metadata.exam_date else '', filename=filename) }}"
+               class="btn btn-primary">
+                <i class="fas fa-download"></i> Download
+            </a>
+        </div>
+    </div>
+
+    <div class="excel-metadata">
+        <div class="metadata-grid">
+            <div class="metadata-item">
+                <span class="label">Filename:</span>
+                <span class="value">{{ filename }}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="label">Date:</span>
+                <span class="value">{{ metadata.exam_date }}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="label">Semester:</span>
+                <span class="value">{{ metadata.semester }}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="label">Slot:</span>
+                <span class="value">{{ metadata.slot }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-tabs">
+        {% for sheet_name in sheet_names %}
+        <button class="sheet-tab {% if loop.first %}active{% endif %}" onclick="showSheet('{{ sheet_name }}')">
+            {{ sheet_name }}
+        </button>
+        {% endfor %}
+    </div>
+
+    <div class="sheet-container">
+        {% for sheet_name, df in df_dict.items() %}
+        <div class="sheet-content" id="sheet-{{ sheet_name }}" {% if not loop.first %}style="display: none;"{% endif %}>
+            <div class="table-container">
+                <table class="excel-table">
+                    <thead>
+                        <tr>
+                            {% for col in df.columns %}
+                            <th>{{ col }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for idx, row in df.iterrows() %}
+                        <tr>
+                            {% for col in df.columns %}
+                            <td>{% if row[col] is not none %}{{ row[col] }}{% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.excel-metadata {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.metadata-item .label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metadata-item .value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.sheet-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.sheet-tab {
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.sheet-tab:hover {
+    background: #e9ecef;
+}
+
+.sheet-tab.active {
+    background: #3498db;
+    color: white;
+}
+
+.sheet-container {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table-container {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ecf0f1;
+    border-radius: 6px;
+}
+
+.excel-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.excel-table th {
+    background: #34495e;
+    color: white;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-weight: 500;
+}
+
+.excel-table td {
+    padding: 10px;
+    border: 1px solid #ecf0f1;
+}
+
+.excel-table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.excel-table tr:hover {
+    background: #e8f4f8;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.btn-secondary:hover {
+    background: #bdc3c7;
+    color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .metadata-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sheet-tabs {
+        flex-direction: column;
+    }
+
+    .sheet-tab {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+function showSheet(sheetName) {
+    // Hide all sheets
+    document.querySelectorAll('.sheet-content').forEach(sheet => {
+        sheet.style.display = 'none';
+    });
+
+    // Show selected sheet
+    const sheetElement = document.getElementById('sheet-' + sheetName);
+    if (sheetElement) {
+        sheetElement.style.display = 'block';
+    }
+    
+    // Update active tab
+    document.querySelectorAll('.sheet-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.textContent.trim() === sheetName) {
+            tab.classList.add('active');
+        }
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+============================================================
+QUESTION PAPER COUNT REPORT
+Elective Type: General
+============================================================
+
+ROOM-WISE DISTRIBUTION
+------------------------------------------------------------
+Room1: CONSTITUTION OF INDIA ( MCN202 ) - 29 students
+Room2: CONSTITUTION OF INDIA ( MCN202 ) - 30 students
+Room3: CONSTITUTION OF INDIA ( MCN202 ) - 32 students
+Room4: CONSTITUTION OF INDIA ( MCN202 ) - 29 students
+Room5: CONSTITUTION OF INDIA ( MCN202 ) - 31 students
+Room6: CONSTITUTION OF INDIA ( MCN202 ) - 30 students
+Room7: CONSTITUTION OF INDIA ( MCN202 ) - 30 students
+Room8: CONSTITUTION OF INDIA ( MCN202 ) - 31 students
+Room9: CONSTITUTION OF INDIA ( MCN202 ) - 30 students
+Room10: CONSTITUTION OF INDIA ( MCN202 ) - 29 students
+Room11: CONSTITUTION OF INDIA ( MCN202 ) - 29 students
+Room12: CONSTITUTION OF INDIA ( MCN202 ) - 30 students
+Room13: CONSTITUTION OF INDIA ( MCN202 ) - 28 students
+
+============================================================
+SUBJECT SUMMARY
+============================================================
+CONSTITUTION OF INDIA ( MCN202 ): 388 students
+
+Total Students: 388
+============================================================

@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+
+{% block page_title %}Generate - Series Exam{% endblock %}
+
+{% block content %}
+<div class="series-allocation-container">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <i class="fas fa-cogs"></i>
+                Generate Series Arrangement
+            </h2>
+            <span class="badge series">Series Exam</span>
+        </div>
+
+        {% if not session.get('exam_type') or session.exam_type != 'Series' %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Please select Series exam from dashboard first.</span>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">Go to Dashboard</a>
+        </div>
+        {% elif not session.get('series_data') %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>No series data found.</span>
+            <a href="{{ url_for('series_entry') }}" class="btn btn-primary btn-sm">Enter Data</a>
+        </div>
+        {% else %}
+        <!-- Data Overview -->
+        <div class="data-overview">
+            <h3><i class="fas fa-chart-bar"></i> Data Overview</h3>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <i class="fas fa-door-open"></i>
+                    <div>
+                        <span class="overview-label">Total Rooms</span>
+                        <span class="overview-value">{{ session.series_data.rooms|length }}</span>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <i class="fas fa-users"></i>
+                    <div>
+                        <span class="overview-label">Total Classes</span>
+                        <span class="overview-value">{{ session.series_data.classes|length }}</span>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <div>
+                        <span class="overview-label">Total Students</span>
+                        <span class="overview-value">{{ session.series_data.total_students }}</span>
+                    </div>
+                </div>
+                <div class="overview-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <span class="overview-label">Total Capacity</span>
+                        <span class="overview-value">{{ session.series_data.total_capacity }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Details -->
+        <div class="room-details">
+            <h3><i class="fas fa-door-open"></i> Room Configuration</h3>
+            <div class="room-chips">
+                {% for room, capacity in session.series_data.rooms.items() %}
+                <div class="room-chip">
+                    <span class="room-name">{{ room }}</span>
+                    <span class="room-capacity">{{ capacity }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Class Details -->
+        <div class="class-details">
+            <h3><i class="fas fa-book"></i> Class-Subject Mapping</h3>
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Subject</th>
+                            <th>Strength</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for class_item in session.series_data.classes %}
+                        <tr>
+                            <td><strong>{{ class_item.name }}</strong></td>
+                            <td>{{ session.series_data.subjects[class_item.name] }}</td>
+                            <td>{{ class_item.strength }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Capacity Warning -->
+        {% if session.series_data.total_students > session.series_data.total_capacity %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Warning: {{ session.series_data.total_students - session.series_data.total_capacity }} students exceed available capacity</span>
+        </div>
+        {% endif %}
+
+        <!-- Generate Form -->
+        <form method="POST" class="generate-form">
+            <div class="form-group">
+                <label for="algorithm">
+                    <i class="fas fa-code-branch"></i>
+                    Allocation Algorithm
+                </label>
+                <select name="algorithm" id="algorithm" class="form-control">
+                    <option value="general">Standard Allocation (Default)</option>
+                                    </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-cogs"></i>
+                    Generate Arrangement
+                </button>
+                <a href="{{ url_for('series_entry') }}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-edit"></i>
+                    Edit Data
+                </a>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.series-allocation-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.data-overview {
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.data-overview h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.data-overview h3 i {
+    color: var(--primary);
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.overview-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+}
+
+.overview-item i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.overview-label {
+    display: block;
+    color: var(--gray-500);
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.overview-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.room-details,
+.class-details {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--gray-200);
+}
+
+.room-details h3,
+.class-details h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.room-details h3 i,
+.class-details h3 i {
+    color: var(--primary);
+}
+
+.room-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.room-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+}
+
+.room-name {
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.room-capacity {
+    background: var(--primary);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+}
+
+.generate-form {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--gray-200);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}

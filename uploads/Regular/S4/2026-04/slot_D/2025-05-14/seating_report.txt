@@ -1,0 +1,166 @@
+================================================================================
+AUTOMATED SEATING ARRANGEMENT REPORT
+Elective Type: General
+================================================================================
+
+QUESTION PAPER COUNT SUMMARY
+----------------------------------------
+COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ): 135 students
+DATABASE MANAGEMENT SYSTEMS ( ITT206 ): 64 students
+TRANSPORTATION ENGINEERING ( CET206 ): 58 students
+Total Students: 257
+
+================================================================================
+
+================================================================================
+ Room1 | TOTAL: 29 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT20EC010      | LBT20IT009      | LBT22EC020      | LBT23IT004      | LBT23EC005      |
+2     | LBT20EC022      | LBT21IT012      | LLBT22EC051     | LBT23IT005      | LBT23EC006      |
+3     | LBT20EC027      | LLBT21IT058     | LBT23EC001      | LBT23IT006      | LBT23EC007      |
+4     | LBT20EC030      | LBT23IT001      | LBT23EC002      | LBT23IT007      | LBT23EC008      |
+5     | LBT20EC054      | LBT23IT002      | LBT23EC003      | LBT23IT008      | LBT23EC009      |
+6     | LBT21EC059      | LBT23IT003      | LBT23EC004      | --              | LBT23EC010      |
+7     | --              | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 6/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7EC: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ), S7IT: DATABASE MANAGEMENT SYSTEMS ( ITT206 )
+
+================================================================================
+ Room2 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT22ECE001     | LBT22CE010      | LBT23ECE003     | LBT23CE005      | LBT23ECE009     |
+2     | LBT22ECE032     | LBT22CE033      | LBT23ECE004     | LBT23CE006      | LBT23ECE010     |
+3     | LBT22ECE038     | LBT23CE001      | LBT23ECE005     | LBT23CE007      | LBT23ECE011     |
+4     | LBT22ECE039     | LBT23CE002      | LBT23ECE006     | LBT23CE008      | LBT23ECE012     |
+5     | LLBT22ECE047    | LBT23CE003      | LBT23ECE007     | LBT23CE009      | LBT23ECE013     |
+6     | LBT23ECE001     | LBT23CE004      | LBT23ECE008     | --              | LBT23ECE014     |
+7     | LBT23ECE002     | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 6/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7CE: TRANSPORTATION ENGINEERING ( CET206 ), S7ER: INTEGRATED CIRCUITS ( ERT206 )
+
+================================================================================
+ Room3 | TOTAL: 28 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23EC011      | LBT23IT009      | LBT23EC017      | LBT23IT014      | LBT23EC023      |
+2     | LBT23EC012      | LBT23IT010      | LBT23EC018      | LBT23IT015      | LBT23EC024      |
+3     | LBT23EC013      | LBT23IT011      | LBT23EC019      | LBT23IT016      | LBT23EC025      |
+4     | LBT23EC014      | LBT23IT012      | LBT23EC020      | LBT23IT017      | LBT23EC026      |
+5     | LBT23EC015      | LBT23IT013      | LBT23EC021      | LBT23IT018      | LBT23EC027      |
+6     | LBT23EC016      | --              | LBT23EC022      | --              | LBT23EC028      |
+7     | --              | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 5/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7EC: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ), S7IT: DATABASE MANAGEMENT SYSTEMS ( ITT206 )
+
+================================================================================
+ Room4 | TOTAL: 28 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23CE010      | LBT23IT019      | LBT23CE016      | LBT23IT024      | LBT23CE022      |
+2     | LBT23CE011      | LBT23IT020      | LBT23CE017      | LBT23IT025      | LBT23CE023      |
+3     | LBT23CE012      | LBT23IT021      | LBT23CE018      | LBT23IT026      | LBT23CE024      |
+4     | LBT23CE013      | LBT23IT022      | LBT23CE019      | LBT23IT027      | LBT23CE025      |
+5     | LBT23CE014      | LBT23IT023      | LBT23CE020      | LBT23IT028      | LBT23CE026      |
+6     | LBT23CE015      | --              | LBT23CE021      | --              | LBT23CE027      |
+7     | --              | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 5/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7IT: DATABASE MANAGEMENT SYSTEMS ( ITT206 ), S7CE: TRANSPORTATION ENGINEERING ( CET206 )
+
+================================================================================
+ Room5 | TOTAL: 27 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23ECE015     | LBT23EC029      | LBT23ECE021     | LBT23EC035      | LBT23ECE027     |
+2     | LBT23ECE016     | LBT23EC030      | LBT23ECE022     | LBT23EC036      | LBT23ECE028     |
+3     | LBT23ECE018     | LBT23EC031      | LBT23ECE023     | LBT23EC037      | LBT23ECE029     |
+4     | LBT23ECE019     | LBT23EC032      | LBT23ECE024     | LBT23EC038      | LBT23ECE030     |
+5     | LBT23ECE020     | LBT23EC033      | LBT23ECE025     | LBT23EC039      | LBT23ECE031     |
+6     | --              | LBT23EC034      | LBT23ECE026     | --              | --              |
+7     | --              | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 5/7, Left3: 6/7, Middle2: 6/6, Right1: 5/7, Right3: 5/7
+Subjects: S7EC: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ), S7ER: INTEGRATED CIRCUITS ( ERT206 )
+
+================================================================================
+ Room6 | TOTAL: 28 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23IT029      | LBT23EC040      | LBT23IT035      | LBT23EC045      | LBT23IT041      |
+2     | LBT23IT030      | LBT23EC041      | LBT23IT036      | LBT23EC047      | LBT23IT042      |
+3     | LBT23IT031      | LBT23EC042      | LBT23IT037      | LBT23EC048      | LBT23IT043      |
+4     | LBT23IT032      | LBT23EC043      | LBT23IT038      | LBT23EC049      | LBT23IT044      |
+5     | LBT23IT033      | LBT23EC044      | LBT23IT039      | LBT23EC050      | LBT23IT045      |
+6     | LBT23IT034      | --              | LBT23IT040      | --              | LBT23IT046      |
+7     | --              | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 6/7, Left3: 5/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7EC: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ), S7IT: DATABASE MANAGEMENT SYSTEMS ( ITT206 )
+
+================================================================================
+ Room7 | TOTAL: 29 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23CE028      | LBT23ECE032     | LBT23CE033      | LBT23ECE039     | LBT23CE039      |
+2     | LBT23CE029      | LBT23ECE033     | LBT23CE034      | LBT23ECE040     | LBT23CE040      |
+3     | LBT23CE030      | LBT23ECE034     | LBT23CE035      | LBT23ECE041     | LLBT23CE041     |
+4     | LBT23CE031      | LBT23ECE035     | LBT23CE036      | LBT23ECE042     | LLBT23CE042     |
+5     | LBT23CE032      | LBT23ECE036     | LBT23CE037      | LBT23ECE043     | LLBT23CE043     |
+6     | --              | LBT23ECE037     | LBT23CE038      | LBT23ECE044     | --              |
+7     | --              | LBT23ECE038     |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 5/7, Left3: 7/7, Middle2: 6/6, Right1: 6/7, Right3: 5/7
+Subjects: S7ER: INTEGRATED CIRCUITS ( ERT206 ), S7CE: TRANSPORTATION ENGINEERING ( CET206 )
+
+================================================================================
+ Room8 | TOTAL: 30 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23EC051      | LBT23ECE045     | LBT23EC058      | LBT23ECE051     | LLBT23EC064     |
+2     | LBT23EC052      | LBT23ECE046     | LBT23EC059      | LBT23ECE052     | LLBT23EC065     |
+3     | LBT23EC053      | LBT23ECE047     | LBT23EC060      | LBT23ECE053     | LLBT23EC066     |
+4     | LBT23EC054      | LBT23ECE048     | LBT23EC061      | LBT23ECE054     | LLBT23EC067     |
+5     | LBT23EC055      | LBT23ECE049     | LBT23EC062      | LBT23ECE055     | LLBT23EC068     |
+6     | LBT23EC056      | LBT23ECE050     | LBT23EC063      | --              | LLBT23EC069     |
+7     | LBT23EC057      | --              |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 7/7, Left3: 6/7, Middle2: 6/6, Right1: 5/7, Right3: 6/7
+Subjects: S7EC: COMPUTER ARCHITECTURE AND MICROCONTROLLERS ( ECT206 ), S7ER: INTEGRATED CIRCUITS ( ERT206 )
+
+================================================================================
+ Room9 | TOTAL: 28 | BLOCK CAPACITY: 7-7-6-7-7 
+================================================================================
+Row   | Left1 (7)       | Left3 (7)       | Middle2 (6)     | Right1 (7)      | Right3 (7)     
+-----------------------------------------------------------------------------------------------
+1     | LBT23IT047      | LLBT23CE044     | LBT23IT052      | LLBT23CE051     | LBT23IT058      |
+2     | LBT23IT048      | LLBT23CE045     | LBT23IT053      | LLBT23CE052     | LLBT23IT059     |
+3     | LBT23IT049      | LLBT23CE046     | LBT23IT054      | LLBT23CE053     | LLBT23IT060     |
+4     | LBT23IT050      | LLBT23CE047     | LBT23IT055      | LLBT23CE054     | LLBT23IT061     |
+5     | LBT23IT051      | LLBT23CE048     | LBT23IT056      | LLBT23CE055     | --              |
+6     | --              | LLBT23CE049     | LBT23IT057      | LLBT23CE056     | --              |
+7     | --              | LLBT23CE050     |                 | --              | --              |
+-----------------------------------------------------------------------------------------------
+Block Usage: Left1: 5/7, Left3: 7/7, Middle2: 6/6, Right1: 6/7, Right3: 4/7
+Subjects: S7IT: DATABASE MANAGEMENT SYSTEMS ( ITT206 ), S7CE: TRANSPORTATION ENGINEERING ( CET206 )
+
+================================================================================
+SUMMARY
+================================================================================
+Total Rooms: 9
+Total Students: 257
+Average per Room: 28.6
+Leftover Students: 0
+Max Room Difference: 3

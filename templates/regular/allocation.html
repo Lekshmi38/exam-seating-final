@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block page_title %}Allocation - Regular Exam{% endblock %}
+
+{% block content %}
+<div class="allocation-container">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <i class="fas fa-chair"></i>
+                Generate Seating Arrangement
+            </h2>
+            <span class="badge regular">Regular Exam</span>
+        </div>
+
+        {% if not session.get('exam_type') or session.exam_type != 'Regular' %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Please select Regular exam from dashboard first.</span>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">Go to Dashboard</a>
+        </div>
+        {% else %}
+        <form method="POST" class="allocation-form" id="allocationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-layer-group"></i>
+                        Semester
+                    </label>
+                    <select name="semester" id="semester" class="form-control" required>
+                        <option value="">Select Semester</option>
+                        {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}
+                        <option value="{{ sem }}">{{ sem }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-calendar"></i>
+                        Month-Year
+                    </label>
+                    <input type="month" name="month_year" id="month_year" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-clock"></i>
+                        Slot
+                    </label>
+                    <select name="slot" id="slot" class="form-control" required>
+                        <option value="">Select Slot</option>
+                        {% for s in ['A','B','C','D','E','F','G','H'] %}
+                        <option value="{{ s }}">Slot {{ s }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="dateGroup" style="display: none;">
+                <label>
+                    <i class="fas fa-calendar-day"></i>
+                    Exam Date
+                </label>
+                <select name="exam_date" id="exam_date" class="form-control">
+                    <option value="">Select Date</option>
+                </select>
+                <small class="form-text text-muted">Multiple dates found for this slot. Please select one.</small>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-code-branch"></i>
+                    Algorithm
+                </label>
+                <div class="algorithm-options">
+                    <label class="algorithm-card">
+                        <input type="radio" name="elective_type" value="general" checked>
+                        <div class="algorithm-content">
+                            <i class="fas fa-cogs"></i>
+                            <strong>General Algorithm</strong>
+                            <small>Standard seating arrangement</small>
+                        </div>
+                    </label>
+
+                    {% if program_elective_available %}
+                    <label class="algorithm-card">
+                        <input type="radio" name="elective_type" value="program_elective">
+                        <div class="algorithm-content">
+                            <i class="fas fa-code"></i>
+                            <strong>Program Elective</strong>
+                            <small>For program elective subjects</small>
+                        </div>
+                    </label>
+                    {% endif %}
+
+                    {% if open_elective_available %}
+                    <label class="algorithm-card">
+                        <input type="radio" name="elective_type" value="open_elective">
+                        <div class="algorithm-content">
+                            <i class="fas fa-book-open"></i>
+                            <strong>Open Elective</strong>
+                            <small>For open elective subjects</small>
+                        </div>
+                    </label>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                    <i class="fas fa-cogs"></i>
+                    Generate Arrangement
+                </button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const semester = document.getElementById('semester');
+    const monthYear = document.getElementById('month_year');
+    const slot = document.getElementById('slot');
+    const dateGroup = document.getElementById('dateGroup');
+    const dateSelect = document.getElementById('exam_date');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function fetchAvailableDates() {
+        if (!semester.value || !monthYear.value || !slot.value) {
+            dateGroup.style.display = 'none';
+            return;
+        }
+
+        // Show loading
+        dateSelect.innerHTML = '<option value="">Loading dates...</option>';
+        dateGroup.style.display = 'block';
+        submitBtn.disabled = true;
+
+        fetch(`/api/available-dates?semester=${semester.value}&month_year=${monthYear.value}&slot=${slot.value}`)
+            .then(response => response.json())
+            .then(data => {
+                dateSelect.innerHTML = '<option value="">Select Date</option>';
+
+                if (data.dates && data.dates.length > 0) {
+                    data.dates.forEach(date => {
+                        const option = document.createElement('option');
+                        option.value = date;
+                        // Format date from YYYY-MM-DD to DD.MM.YYYY
+                        const parts = date.split('-');
+                        const formattedDate = parts.length === 3 ? `${parts[2]}.${parts[1]}.${parts[0]}` : date;
+                        option.textContent = formattedDate;
+                        dateSelect.appendChild(option);
+                    });
+
+                    if (data.dates.length === 1) {
+                        // Auto-select if only one date
+                        dateSelect.value = data.dates[0];
+                        dateGroup.style.display = 'none';
+                        submitBtn.disabled = false;
+                    } else {
+                        dateGroup.style.display = 'block';
+                        submitBtn.disabled = true;
+                    }
+                } else {
+                    dateGroup.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                dateGroup.style.display = 'none';
+                submitBtn.disabled = false;
+            });
+    }
+
+    // Add event listeners to trigger date fetch
+    semester.addEventListener('change', fetchAvailableDates);
+    monthYear.addEventListener('change', fetchAvailableDates);
+    slot.addEventListener('change', fetchAvailableDates);
+
+    // Enable submit when date is selected
+    dateSelect.addEventListener('change', function() {
+        submitBtn.disabled = !this.value;
+    });
+
+    // Form validation
+    document.getElementById('allocationForm').addEventListener('submit', function(e) {
+        if (dateGroup.style.display === 'block' && !dateSelect.value) {
+            e.preventDefault();
+            alert('Please select an exam date');
+            return false;
+        }
+        return true;
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block page_title %}Upload - Regular Exam{% endblock %}
+
+{% block content %}
+<div class="upload-container">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <i class="fas fa-upload"></i>
+                Upload Master File
+            </h2>
+            <span class="badge regular">Regular Exam</span>
+        </div>
+
+        {% if not session.get('exam_type') or session.exam_type != 'Regular' %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Please select Regular exam from dashboard first.</span>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">Go to Dashboard</a>
+        </div>
+        {% else %}
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-layer-group"></i>
+                        Semester
+                    </label>
+                    <select name="semester" class="form-control" required>
+                        <option value="">Select Semester</option>
+                        {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}
+                        <option value="{{ sem }}">{{ sem }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-calendar"></i>
+                        Month-Year
+                    </label>
+                    <input type="month" name="month_year" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-file-excel"></i>
+                    Master File (Excel)
+                </label>
+                <div class="file-upload-area">
+                    <input type="file" name="master_file" accept=".xlsx,.xls" required id="fileInput">
+                    <label for="fileInput" class="file-upload-label" id="fileLabel">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span class="upload-text">Choose file or drag here</span>
+                        <small>.xlsx or .xls (max 16MB)</small>
+                    </label>
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="fileName"></span>
+                        <button type="button" class="btn-remove-file" onclick="removeFile()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <small class="form-text text-muted">
+                    <i class="fas fa-info-circle"></i>
+                    File should contain columns: Student, Register No, Branch, Slot, Course, Exam Date
+                </small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-upload"></i>
+                    Upload & Process
+                </button>
+                <button type="reset" class="btn btn-outline btn-lg">
+                    <i class="fas fa-undo"></i>
+                    Reset
+                </button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const fileLabel = document.getElementById('fileLabel');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const uploadText = document.querySelector('.upload-text');
+
+    if (this.files && this.files.length > 0) {
+        // Show file info
+        fileName.textContent = this.files[0].name;
+        fileLabel.style.display = 'none';
+        fileInfo.style.display = 'flex';
+    }
+});
+
+function removeFile() {
+    const fileInput = document.getElementById('fileInput');
+    const fileLabel = document.getElementById('fileLabel');
+    const fileInfo = document.getElementById('fileInfo');
+
+    // Clear the file input
+    fileInput.value = '';
+
+    // Show upload label again
+    fileLabel.style.display = 'flex';
+    fileInfo.style.display = 'none';
+}
+
+// Drag and drop functionality
+const dropArea = document.querySelector('.file-upload-label');
+
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, highlight, false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, unhighlight, false);
+});
+
+function highlight() {
+    dropArea.classList.add('highlight');
+}
+
+function unhighlight() {
+    dropArea.classList.remove('highlight');
+}
+
+dropArea.addEventListener('drop', handleDrop, false);
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    const fileInput = document.getElementById('fileInput');
+
+    if (files.length > 0) {
+        fileInput.files = files;
+
+        // Trigger change event
+        const event = new Event('change', { bubbles: true });
+        fileInput.dispatchEvent(event);
+    }
+}
+</script>
+{% endblock %}

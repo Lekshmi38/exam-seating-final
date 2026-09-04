@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block page_title %}Series Exam Files{% endblock %}
+
+{% block content %}
+<div class="sf-wrap">
+
+    <!-- ── Page Header ──────────────────────────────────────────────── -->
+    <div class="sf-header card">
+        <div class="sf-header-left">
+            <div class="sf-header-icon">
+                <i class="fas fa-folder-open"></i>
+            </div>
+            <div>
+                <h2>Series Exam Output Files</h2>
+                <p>Download or preview generated class assignments, seating charts and master lists</p>
+            </div>
+        </div>
+        <div class="sf-header-actions">
+            <a href="{{ url_for('series_results') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-table"></i> View Results
+            </a>
+            <a href="{{ url_for('series_allocation') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Arrangement
+            </a>
+        </div>
+    </div>
+
+    <!-- ── Empty State ──────────────────────────────────────────────── -->
+    {% if not sessions %}
+    <div class="sf-empty card">
+        <div class="sf-empty-icon"><i class="fas fa-inbox"></i></div>
+        <h3>No files yet</h3>
+        <p>Generate a series exam arrangement to see the output files here.</p>
+        <a href="{{ url_for('series_allocation') }}" class="btn btn-success">
+            <i class="fas fa-layer-group"></i> Generate Arrangement
+        </a>
+    </div>
+
+    {% else %}
+
+    <!-- ── Sessions List ────────────────────────────────────────────── -->
+    {% for session_item in sessions %}
+    <div class="sf-session card">
+
+        <!-- session header -->
+        <div class="sf-session-header" onclick="toggleSession('sess-{{ loop.index }}')">
+            <div class="sf-session-left">
+                <div class="sf-date-badge">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>{{ session_item.date }}</span>
+                </div>
+                <span class="sf-file-count">
+                    {{ session_item.files | length }} file{{ 's' if session_item.files | length != 1 }}
+                </span>
+            </div>
+            <i class="fas fa-chevron-down sf-chevron" id="chev-{{ loop.index }}"></i>
+        </div>
+
+        <!-- file list -->
+        <div class="sf-file-grid" id="sess-{{ loop.index }}">
+            {% for file in session_item.files %}
+            <div class="sf-file-card sf-file-{{ file.type }}">
+
+                <!-- icon -->
+                <div class="sf-file-icon">
+                    {% if file.type == 'excel' %}
+                        <i class="fas fa-file-excel"></i>
+                    {% elif file.type == 'pdf' %}
+                        <i class="fas fa-file-pdf"></i>
+                    {% else %}
+                        <i class="fas fa-file"></i>
+                    {% endif %}
+                </div>
+
+                <!-- info -->
+                <div class="sf-file-info">
+                    <span class="sf-file-name" title="{{ file.name }}">{{ file.name }}</span>
+                    <span class="sf-file-meta">
+                        {{ (file.size / 1024) | round(1) }} KB &nbsp;&middot;&nbsp; {{ file.modified }}
+                    </span>
+                    <span class="sf-file-label">
+                        {% if 'class_assignment' in file.name %}
+                            Class Assignment Table
+                        {% elif 'seating_arrangement' in file.name %}
+                            Room-wise Seating Chart
+                        {% elif 'master_list' in file.name %}
+                            Master List
+                        {% else %}
+                            {{ file.name }}
+                        {% endif %}
+                    </span>
+                </div>
+
+                <!-- actions -->
+                <div class="sf-file-actions">
+                    {% if file.type == 'pdf' %}
+                    <a href="{{ url_for('series_download_file', date_folder=file.date_folder, filename=file.name) }}"
+                       target="_blank"
+                       class="sf-btn sf-btn-view"
+                       title="View PDF in browser">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('series_download_file', date_folder=file.date_folder, filename=file.name) }}"
+                       {% if file.type == 'excel' %}download{% endif %}
+                       class="sf-btn sf-btn-dl"
+                       title="Download file">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div><!-- /sf-file-grid -->
+
+    </div><!-- /sf-session -->
+    {% endfor %}
+
+    {% endif %}
+</div><!-- /sf-wrap -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Expand first session, collapse the rest
+    document.querySelectorAll('[id^="sess-"]').forEach(function (el) {
+        const idx = el.id.replace('sess-', '');
+        const chev = document.getElementById('chev-' + idx);
+        if (idx === '1') {
+            el.style.display = 'flex';
+            if (chev) chev.classList.add('open');
+        } else {
+            el.style.display = 'none';
+        }
+    });
+});
+
+function toggleSession(id) {
+    const grid = document.getElementById(id);
+    const idx  = id.replace('sess-', '');
+    const chev = document.getElementById('chev-' + idx);
+    if (!grid) return;
+
+    const isOpen = grid.style.display !== 'none';
+    grid.style.display = isOpen ? 'none' : 'flex';
+    if (chev) chev.classList.toggle('open', !isOpen);
+}
+</script>
+{% endblock %}

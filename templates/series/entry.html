@@ -1,0 +1,769 @@
+{% extends "base.html" %}
+
+{% block page_title %}Data Entry - Series Exam{% endblock %}
+
+{% block content %}
+<div class="series-entry-container">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <i class="fas fa-pencil-alt"></i>
+                Series Exam Data Entry
+            </h2>
+            <span class="badge series">Series Exam</span>
+            {% if session.get('series_data') %}
+            <div class="edit-badge">
+                <i class="fas fa-edit"></i> Editing Existing Data
+            </div>
+            {% endif %}
+        </div>
+
+        {% if not session.get('exam_type') or session.exam_type != 'Series' %}
+        <div class="alert warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>Please select Series exam from dashboard first.</span>
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">Go to Dashboard</a>
+        </div>
+        {% else %}
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Rooms</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Classes</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Subjects</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Summary</div>
+            </div>
+        </div>
+
+        <!-- ── Step 1: Rooms ─────────────────────────────────────── -->
+        <div id="step1" class="step-content active">
+            <h3 class="step-title">
+                <i class="fas fa-door-open"></i>
+                Room Configuration
+            </h3>
+            <p class="step-description">
+                For each room enter the seats-per-column for each group.
+                <strong>Left</strong> = seats in each of L1, L2, L3 &nbsp;·&nbsp;
+                <strong>Mid</strong> = seats in each of M1, M2 &nbsp;·&nbsp;
+                <strong>Right</strong> = seats in each of R1, R2, R3.
+                <br>e.g. Left&nbsp;7 · Mid&nbsp;6 · Right&nbsp;7 → total&nbsp;52
+            </p>
+
+            <div class="rooms-header">
+                <button class="btn btn-secondary btn-sm" onclick="addRoom()">
+                    <i class="fas fa-plus"></i> Add Room
+                </button>
+                <button class="btn btn-danger btn-sm" onclick="removeLastRoom()" id="removeRoomBtn">
+                    <i class="fas fa-minus"></i> Remove Last Room
+                </button>
+            </div>
+
+            <!-- column header row -->
+            <div class="room-header-row">
+                <div class="rhr-name">Room</div>
+                <div class="rhr-grp rhr-left">Left <span class="rhr-sub">(per col × 3)</span></div>
+                <div class="rhr-grp rhr-mid">Mid <span class="rhr-sub">(per col × 2)</span></div>
+                <div class="rhr-grp rhr-right">Right <span class="rhr-sub">(per col × 3)</span></div>
+                <div class="rhr-total">Total</div>
+                <div class="rhr-del"></div>
+            </div>
+
+            <div id="roomsContainer"></div>
+
+            <div class="room-summary" style="margin-top:1rem;">
+                <div class="summary-item">
+                    <span class="summary-label">Total Rooms</span>
+                    <span class="summary-value" id="totalRooms">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Capacity</span>
+                    <span class="summary-value" id="totalCapacity">0</span>
+                </div>
+            </div>
+
+            <div class="step-navigation">
+                <div></div>
+                <button class="btn btn-primary" onclick="nextStep()">
+                    Next: Classes <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ── Step 2: Classes ───────────────────────────────────── -->
+        <div id="step2" class="step-content">
+            <h3 class="step-title">
+                <i class="fas fa-users"></i>
+                Class Details
+            </h3>
+            <p class="step-description">Add classes with proper naming (CS1, CS2, CS3 for CSE; single divisions for other branches)</p>
+
+            <div id="classesList" class="classes-list"></div>
+
+            <button class="btn-add" onclick="addClass()">
+                <i class="fas fa-plus"></i>
+                Add Class
+            </button>
+
+            <div class="presets-section">
+                <h4>Quick Add Presets</h4>
+
+                <div class="preset-group">
+                    <h5>S7 Classes (2022 Admission)</h5>
+                    <div class="presets">
+                        <button class="preset-btn" onclick="addPresetClasses(['S7CS1','S7CS2','S7CS3'])"><i class="fas fa-laptop-code"></i> S7 CSE (3 Divisions)</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S7IT'])"><i class="fas fa-globe"></i> S7 IT</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S7EC'])"><i class="fas fa-microchip"></i> S7 EC</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S7ER'])"><i class="fas fa-satellite"></i> S7 ER</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S7CE'])"><i class="fas fa-drafting-compass"></i> S7 CE</button>
+                    </div>
+                </div>
+
+                <div class="preset-group">
+                    <h5>S5 Classes (2023 Admission)</h5>
+                    <div class="presets">
+                        <button class="preset-btn" onclick="addPresetClasses(['S5CS1','S5CS2'])"><i class="fas fa-laptop-code"></i> S5 CSE (2 Divisions)</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S5IT'])"><i class="fas fa-globe"></i> S5 IT</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S5EC'])"><i class="fas fa-microchip"></i> S5 EC</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S5ER'])"><i class="fas fa-satellite"></i> S5 ER</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S5CE'])"><i class="fas fa-drafting-compass"></i> S5 CE</button>
+                    </div>
+                </div>
+
+                <div class="preset-group">
+                    <h5>S3 Classes (2024 Admission)</h5>
+                    <div class="presets">
+                        <button class="preset-btn" onclick="addPresetClasses(['S3CS1','S3CS2','S3CS3'])"><i class="fas fa-laptop-code"></i> S3 CSE (3 Divisions)</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S3IT'])"><i class="fas fa-globe"></i> S3 IT</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S3EC'])"><i class="fas fa-microchip"></i> S3 EC</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S3ER'])"><i class="fas fa-satellite"></i> S3 ER</button>
+                        <button class="preset-btn" onclick="addPresetClasses(['S3CE'])"><i class="fas fa-drafting-compass"></i> S3 CE</button>
+                    </div>
+                </div>
+
+                <div class="preset-group">
+                    <h5>Add All Classes</h5>
+                    <div class="presets">
+                        <button class="preset-btn preset-all" onclick="addAllClasses()">
+                            <i class="fas fa-layer-group"></i> Add All Classes (S7+S5+S3)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-navigation">
+                <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button class="btn btn-primary" onclick="nextStep()">Next: Subjects <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ── Step 3: Subjects ──────────────────────────────────── -->
+        <div id="step3" class="step-content">
+            <h3 class="step-title">
+                <i class="fas fa-book"></i>
+                Subject Mapping
+            </h3>
+            <p class="step-description">Map subjects to each class (same branch classes usually have same subject)</p>
+
+            <div id="subjectsList" class="subjects-list"></div>
+
+            <div class="presets-section" style="margin-top:1rem;">
+                <h4>Quick Subject Fill</h4>
+                <div class="presets">
+                    <button class="preset-btn" onclick="fillSubjectsByBranch('CS','Computer Networks')"><i class="fas fa-laptop-code"></i> CS: Computer Networks</button>
+                    <button class="preset-btn" onclick="fillSubjectsByBranch('IT','Web Technologies')"><i class="fas fa-globe"></i> IT: Web Technologies</button>
+                    <button class="preset-btn" onclick="fillSubjectsByBranch('EC','Digital Signal Processing')"><i class="fas fa-microchip"></i> EC: DSP</button>
+                    <button class="preset-btn" onclick="fillSubjectsByBranch('ER','Embedded Systems')"><i class="fas fa-satellite"></i> ER: Embedded Systems</button>
+                    <button class="preset-btn" onclick="fillSubjectsByBranch('CE','Structural Analysis')"><i class="fas fa-drafting-compass"></i> CE: Structural Analysis</button>
+                </div>
+            </div>
+
+            <div class="step-navigation">
+                <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button class="btn btn-primary" onclick="nextStep()">Next: Summary <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ── Step 4: Summary ───────────────────────────────────── -->
+        <div id="step4" class="step-content">
+            <h3 class="step-title">
+                <i class="fas fa-chart-pie"></i>
+                Data Summary
+            </h3>
+
+            <div class="final-summary">
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <i class="fas fa-door-open"></i>
+                        <span class="summary-card-label">Total Rooms</span>
+                        <span class="summary-card-value" id="finalTotalRooms">0</span>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-users"></i>
+                        <span class="summary-card-label">Total Classes</span>
+                        <span class="summary-card-value" id="finalTotalClasses">0</span>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-user-graduate"></i>
+                        <span class="summary-card-label">Total Students</span>
+                        <span class="summary-card-value" id="finalTotalStudents">0</span>
+                    </div>
+                    <div class="summary-card">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="summary-card-label">Total Capacity</span>
+                        <span class="summary-card-value" id="finalTotalCapacity">0</span>
+                    </div>
+                </div>
+
+                <div class="capacity-check" id="capacityCheck"></div>
+
+                <div class="data-preview">
+                    <h4>Class-Subject Mapping Preview</h4>
+                    <div class="table-responsive">
+                        <table class="data-table" id="previewTable">
+                            <thead>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Branch</th>
+                                    <th>Division</th>
+                                    <th>Class</th>
+                                    <th>Subject</th>
+                                    <th>Strength</th>
+                                </tr>
+                            </thead>
+                            <tbody id="previewBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-navigation">
+                <button class="btn btn-secondary" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button class="btn btn-success" onclick="saveData()"><i class="fas fa-save"></i> Save & Continue</button>
+                {% if session.get('series_data') %}
+                <button class="btn btn-danger" onclick="clearData()"><i class="fas fa-trash"></i> Clear & Start Fresh</button>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+/* ── Room header row (column labels) ─────────────────────────── */
+.room-header-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr 64px 34px;
+    gap: .5rem;
+    align-items: center;
+    padding: .45rem .875rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--gray-500);
+    margin-bottom: 0;
+}
+.rhr-grp { text-align: center; }
+.rhr-left  { color: #1d4ed8; }
+.rhr-mid   { color: #059669; }
+.rhr-right { color: #7c3aed; }
+.rhr-total { text-align: center; color: var(--dark); }
+.rhr-sub   { font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+/* ── Each room row ───────────────────────────────────────────── */
+.room-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr 64px 34px;
+    gap: .5rem;
+    align-items: center;
+    padding: .55rem .875rem;
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    background: var(--white);
+    transition: background .15s;
+    animation: fadeIn .2s var(--ease);
+}
+.room-row:hover { background: var(--gray-50); }
+#roomsContainer .room-row:last-child {
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.room-row-label {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: .82rem;
+    color: var(--dark);
+}
+
+/* ── Group input cell ────────────────────────────────────────── */
+.room-grp-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--gray-50);
+    padding: .35rem .5rem;
+    gap: .2rem;
+    transition: border-color .2s, background .2s;
+}
+.room-grp-cell:focus-within {
+    background: var(--white);
+}
+
+/* colour-coded borders per group */
+.room-grp-cell.grp-left          { border-color: #bfdbfe; }
+.room-grp-cell.grp-left:focus-within  { border-color: #1d4ed8; box-shadow: 0 0 0 2px rgba(29,78,216,.1); }
+.room-grp-cell.grp-mid           { border-color: #a7f3d0; }
+.room-grp-cell.grp-mid:focus-within   { border-color: #059669; box-shadow: 0 0 0 2px rgba(5,150,105,.1); }
+.room-grp-cell.grp-right         { border-color: #ddd6fe; }
+.room-grp-cell.grp-right:focus-within { border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124,58,237,.1); }
+
+.room-grp-cell input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    color: var(--dark);
+    outline: none;
+    padding: 0;
+    min-width: 0;
+}
+/* hide number spinners */
+.room-grp-cell input::-webkit-outer-spin-button,
+.room-grp-cell input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.room-grp-cell input[type=number] { -moz-appearance: textfield; }
+
+/* ── Total badge ─────────────────────────────────────────────── */
+.room-row-total {
+    text-align: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: .9rem;
+    color: var(--primary);
+    background: var(--primary-50);
+    border: 1px solid var(--primary-100);
+    border-radius: var(--radius-md);
+    padding: .3rem .4rem;
+}
+
+/* ── Delete button ───────────────────────────────────────────── */
+.room-row-del {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-md);
+    background: var(--danger-soft);
+    color: var(--danger);
+    border: 1px solid #fca5a5;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    transition: all .18s;
+    flex-shrink: 0;
+}
+.room-row-del:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+/* ── responsive ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .room-header-row,
+    .room-row {
+        grid-template-columns: 60px 1fr 1fr 1fr 50px 28px;
+        font-size: .75rem;
+        padding: .45rem .5rem;
+        gap: .35rem;
+    }
+}
+</style>
+
+<script>
+let currentStep = 1;
+let roomCount = 0;
+
+{% if session.get('series_data') %}
+const existingData = {{ session.get('series_data')|tojson }};
+{% else %}
+const existingData = null;
+{% endif %}
+
+/* ── Room total helper ───────────────────────────────────────── */
+function roomTotal(left, mid, right) {
+    // left × 3 columns + mid × 2 columns + right × 3 columns
+    return (left * 3) + (mid * 2) + (right * 3);
+}
+
+/* ── Add room row ────────────────────────────────────────────── */
+function addRoom(left = 7, mid = 6, right = 7) {
+    roomCount++;
+    const container = document.getElementById('roomsContainer');
+    const row = document.createElement('div');
+    row.className = 'room-row';
+    row.dataset.roomId = roomCount;
+
+    const total = roomTotal(left, mid, right);
+
+    row.innerHTML = `
+        <div class="room-row-label">Room ${roomCount}</div>
+
+        <div class="room-grp-cell grp-left">
+            <input type="number" class="rc-left" value="${left}"
+                   min="0" max="20" title="Seats per column in Left group (L1, L2, L3)"
+                   onchange="updateRowTotal(this)">
+        </div>
+
+        <div class="room-grp-cell grp-mid">
+            <input type="number" class="rc-mid" value="${mid}"
+                   min="0" max="20" title="Seats per column in Middle group (M1, M2)"
+                   onchange="updateRowTotal(this)">
+        </div>
+
+        <div class="room-grp-cell grp-right">
+            <input type="number" class="rc-right" value="${right}"
+                   min="0" max="20" title="Seats per column in Right group (R1, R2, R3)"
+                   onchange="updateRowTotal(this)">
+        </div>
+
+        <div class="room-row-total">${total}</div>
+
+        <button class="room-row-del" onclick="removeRoom(this)" title="Remove room">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    container.appendChild(row);
+    updateRoomSummary();
+    document.getElementById('removeRoomBtn').disabled = false;
+}
+
+/* ── Update the total badge for a single row ─────────────────── */
+function updateRowTotal(input) {
+    const row  = input.closest('.room-row');
+    const left  = parseInt(row.querySelector('.rc-left').value)  || 0;
+    const mid   = parseInt(row.querySelector('.rc-mid').value)   || 0;
+    const right = parseInt(row.querySelector('.rc-right').value) || 0;
+    row.querySelector('.room-row-total').textContent = roomTotal(left, mid, right);
+    updateRoomSummary();
+}
+
+/* ── Remove a specific room row ──────────────────────────────── */
+function removeRoom(btn) {
+    btn.closest('.room-row').remove();
+    roomCount--;
+    // Re-number labels
+    document.querySelectorAll('.room-row').forEach((r, i) => {
+        r.dataset.roomId = i + 1;
+        r.querySelector('.room-row-label').textContent = `Room ${i + 1}`;
+    });
+    updateRoomSummary();
+    if (roomCount === 0) document.getElementById('removeRoomBtn').disabled = true;
+}
+
+/* ── Remove last room ────────────────────────────────────────── */
+function removeLastRoom() {
+    const container = document.getElementById('roomsContainer');
+    if (container.lastChild) {
+        container.removeChild(container.lastChild);
+        roomCount--;
+        updateRoomSummary();
+        if (roomCount === 0) document.getElementById('removeRoomBtn').disabled = true;
+    }
+}
+
+/* ── Update summary bar ──────────────────────────────────────── */
+function updateRoomSummary() {
+    let total = 0;
+    document.querySelectorAll('.room-row').forEach(row => {
+        const left  = parseInt(row.querySelector('.rc-left').value)  || 0;
+        const mid   = parseInt(row.querySelector('.rc-mid').value)   || 0;
+        const right = parseInt(row.querySelector('.rc-right').value) || 0;
+        total += roomTotal(left, mid, right);
+    });
+    document.getElementById('totalRooms').textContent    = roomCount;
+    document.getElementById('totalCapacity').textContent = total;
+}
+
+/* ── Step navigation ─────────────────────────────────────────── */
+function nextStep() {
+    if (currentStep < 4) {
+        if (validateStep(currentStep)) {
+            document.querySelectorAll('.step')[currentStep - 1].classList.remove('active');
+            document.querySelectorAll('.step')[currentStep].classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            if (currentStep === 3) updateSubjects();
+            if (currentStep === 4) updateFinalSummary();
+        }
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        document.querySelectorAll('.step')[currentStep - 1].classList.remove('active');
+        document.querySelectorAll('.step')[currentStep - 2].classList.add('active');
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        currentStep--;
+        document.getElementById(`step${currentStep}`).classList.add('active');
+    }
+}
+
+function validateStep(step) {
+    switch (step) {
+        case 1:
+            if (roomCount === 0) { alert('Please add at least one room'); return false; }
+            let cap = 0;
+            document.querySelectorAll('.room-row').forEach(r => {
+                cap += roomTotal(
+                    parseInt(r.querySelector('.rc-left').value)  || 0,
+                    parseInt(r.querySelector('.rc-mid').value)   || 0,
+                    parseInt(r.querySelector('.rc-right').value) || 0
+                );
+            });
+            if (cap === 0) { alert('Please set room capacities'); return false; }
+            return true;
+        case 2:
+            if (document.querySelectorAll('.class-row').length === 0) {
+                alert('Please add at least one class'); return false;
+            }
+            return true;
+        default:
+            return true;
+    }
+}
+
+/* ── Classes ─────────────────────────────────────────────────── */
+function addClass(className = '', strength = 60) {
+    const container = document.getElementById('classesList');
+    const row = document.createElement('div');
+    row.className = 'class-row';
+    row.innerHTML = `
+        <input type="text"   class="class-input"    placeholder="e.g., S7CS1" value="${className}">
+        <input type="number" class="class-strength"  value="${strength}" min="0" max="200">
+        <button class="btn-remove" onclick="this.closest('.class-row').remove(); updateSubjects(); updateFinalSummary();">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+    container.appendChild(row);
+}
+
+function addPresetClasses(classes) {
+    classes.forEach(cls => {
+        let exists = false;
+        document.querySelectorAll('.class-input').forEach(inp => {
+            if (inp.value === cls) exists = true;
+        });
+        if (!exists) addClass(cls, 60);
+    });
+    updateSubjects();
+}
+
+function addAllClasses() {
+    addPresetClasses(['S7CS1','S7CS2','S7CS3','S7IT','S7EC','S7ER','S7CE']);
+    addPresetClasses(['S5CS1','S5CS2','S5IT','S5EC','S5ER','S5CE']);
+    addPresetClasses(['S3CS1','S3CS2','S3CS3','S3IT','S3EC','S3ER','S3CE']);
+}
+
+/* ── Subjects ────────────────────────────────────────────────── */
+function fillSubjectsByBranch(branchCode, subjectName) {
+    document.querySelectorAll('.class-input').forEach((input, index) => {
+        if (input.value.includes(branchCode)) {
+            const subjectInput = document.querySelectorAll('.subject-input')[index];
+            if (subjectInput) subjectInput.value = subjectName;
+        }
+    });
+}
+
+function updateSubjects() {
+    const container = document.getElementById('subjectsList');
+    container.innerHTML = '';
+    document.querySelectorAll('.class-input').forEach((input, index) => {
+        if (!input.value) return;
+        const row = document.createElement('div');
+        row.className = 'subject-row';
+        let defaultSubject = 'Subject';
+        if      (input.value.includes('CS')) defaultSubject = 'Computer Networks';
+        else if (input.value.includes('IT')) defaultSubject = 'Web Technologies';
+        else if (input.value.includes('EC')) defaultSubject = 'Digital Signal Processing';
+        else if (input.value.includes('ER')) defaultSubject = 'Embedded Systems';
+        else if (input.value.includes('CE')) defaultSubject = 'Structural Analysis';
+        else defaultSubject = `Subject ${index + 1}`;
+        row.innerHTML = `
+            <div style="padding:.75rem;font-weight:600;">${input.value}</div>
+            <input type="text" class="subject-input" placeholder="Enter subject name" value="${defaultSubject}">
+            <div></div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+/* ── Final summary ───────────────────────────────────────────── */
+function updateFinalSummary() {
+    const classes = document.querySelectorAll('.class-row');
+    let totalStudents = 0;
+    classes.forEach(row => {
+        totalStudents += parseInt(row.querySelector('.class-strength')?.value) || 0;
+    });
+
+    document.getElementById('finalTotalClasses').textContent  = classes.length;
+    document.getElementById('finalTotalStudents').textContent = totalStudents;
+    document.getElementById('finalTotalRooms').textContent    = roomCount;
+    document.getElementById('finalTotalCapacity').textContent = document.getElementById('totalCapacity').textContent;
+
+    const totalCapacity = parseInt(document.getElementById('totalCapacity').textContent) || 0;
+    const checkDiv = document.getElementById('capacityCheck');
+    if (totalStudents > totalCapacity) {
+        checkDiv.className = 'capacity-check warning';
+        checkDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Need ${totalStudents - totalCapacity} more capacity`;
+    } else {
+        checkDiv.className = 'capacity-check success';
+        checkDiv.innerHTML = `<i class="fas fa-check-circle"></i> Capacity sufficient (${totalCapacity - totalStudents} seats remaining)`;
+    }
+
+    const tbody = document.getElementById('previewBody');
+    tbody.innerHTML = '';
+    document.querySelectorAll('.class-row').forEach((row, i) => {
+        const className = row.querySelector('.class-input').value;
+        const strength  = row.querySelector('.class-strength').value;
+        const subject   = document.querySelectorAll('.subject-input')[i]?.value || 'Not set';
+        if (!className) return;
+
+        const semester = className.substring(0, 2);
+        let branch = '', division = '';
+        if      (className.includes('CS')) { branch = 'CSE'; division = className.includes('1') ? 'Division 1' : className.includes('2') ? 'Division 2' : className.includes('3') ? 'Division 3' : ''; }
+        else if (className.includes('IT')) { branch = 'IT'; }
+        else if (className.includes('EC')) { branch = 'EC'; }
+        else if (className.includes('ER')) { branch = 'ER'; }
+        else if (className.includes('CE')) { branch = 'CE'; }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${semester}</strong></td>
+            <td>${branch}</td>
+            <td>${division}</td>
+            <td>${className}</td>
+            <td>${subject}</td>
+            <td style="text-align:center;"><strong>${strength}</strong></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+/* ── Load existing data ──────────────────────────────────────── */
+function loadExistingData() {
+    if (!existingData) return;
+
+    if (existingData.rooms) {
+        Object.entries(existingData.rooms).forEach(([roomName, cap]) => {
+            // cap is now a block-dict: {Left1:7, Left2:7, Left3:7, Middle1:6, Middle2:6, Right1:7, Right2:7, Right3:7}
+            if (typeof cap === 'object' && cap !== null) {
+                const left  = cap.Left1  || 7;
+                const mid   = cap.Middle1 || 6;
+                const right = cap.Right1 || 7;
+                addRoom(left, mid, right);
+            } else {
+                // legacy integer value — derive evenly
+                addRoom(7, 6, 7);
+            }
+        });
+    }
+
+    if (existingData.classes && existingData.classes.length > 0) {
+        existingData.classes.forEach(cls => addClass(cls.name, cls.strength));
+        setTimeout(() => {
+            if (existingData.subjects) {
+                document.querySelectorAll('.class-input').forEach((input, index) => {
+                    if (existingData.subjects[input.value]) {
+                        const si = document.querySelectorAll('.subject-input')[index];
+                        if (si) si.value = existingData.subjects[input.value];
+                    }
+                });
+            }
+        }, 100);
+    }
+}
+
+/* ── Save data ───────────────────────────────────────────────── */
+function saveData() {
+    const data = { rooms: {}, classes: [], subjects: {} };
+
+    // Collect rooms — send full per-block capacity dict
+    document.querySelectorAll('.room-row').forEach((row, i) => {
+        const left  = parseInt(row.querySelector('.rc-left').value)  || 0;
+        const mid   = parseInt(row.querySelector('.rc-mid').value)   || 0;
+        const right = parseInt(row.querySelector('.rc-right').value) || 0;
+        const roomName = `Room ${i + 1}`;
+        // Each column in the group gets the value entered for that group
+        data.rooms[roomName] = {
+            Left1:   left,  Left2:   left,  Left3:   left,
+            Middle1: mid,   Middle2: mid,
+            Right1:  right, Right2:  right, Right3:  right
+        };
+    });
+
+    document.querySelectorAll('.class-row').forEach((row, i) => {
+        const className = row.querySelector('.class-input').value;
+        const strength  = row.querySelector('.class-strength').value;
+        const subject   = document.querySelectorAll('.subject-input')[i]?.value;
+        if (className && strength > 0) {
+            data.classes.push({ name: className, strength: parseInt(strength) || 0 });
+            if (subject) data.subjects[className] = subject;
+        }
+    });
+
+    fetch('/series/entry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(result => {
+        if (result.success) {
+            window.location.href = '/series/allocation';
+        } else {
+            alert('Error saving data: ' + (result.error || 'unknown'));
+        }
+    })
+    .catch(err => { console.error(err); alert('Error saving data'); });
+}
+
+/* ── Clear data ──────────────────────────────────────────────── */
+function clearData() {
+    if (!confirm('Are you sure you want to clear all data and start fresh?')) return;
+    document.getElementById('roomsContainer').innerHTML = '';
+    roomCount = 0;
+    updateRoomSummary();
+    document.getElementById('classesList').innerHTML   = '';
+    document.getElementById('subjectsList').innerHTML  = '';
+    currentStep = 1;
+    document.querySelectorAll('.step').forEach((s, i)       => s.classList.toggle('active', i === 0));
+    document.querySelectorAll('.step-content').forEach((c, i) => c.classList.toggle('active', i === 0));
+    updateFinalSummary();
+}
+
+/* ── Init ────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+    if (existingData) {
+        loadExistingData();
+    } else {
+        for (let i = 0; i < 3; i++) addRoom(7, 6, 7);   // default: Left=7, Mid=6, Right=7 → 52 seats
+    }
+    updateRoomSummary();
+});
+</script>
+{% endblock %}

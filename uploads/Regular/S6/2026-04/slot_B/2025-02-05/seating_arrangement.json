@@ -1,0 +1,912 @@
+{
+  "rooms": {
+    "Room1": {
+      "total": 31,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT20CS076",
+            "LBT22CS001",
+            "LBT22CS002",
+            "LBT22CS003",
+            "LBT22CS004",
+            "LBT22CS005",
+            "LBT22CS006"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT21EC059",
+            "LLBT21EC062",
+            "LBT22EC001",
+            "LBT22EC002",
+            "LBT22EC003",
+            "LBT22EC004"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS007",
+            "LBT22CS008",
+            "LBT22CS009",
+            "LBT22CS010",
+            "LBT22CS011",
+            "LBT22CS012"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22EC005",
+            "LBT22EC006",
+            "LBT22EC007",
+            "LBT22EC008",
+            "LBT22EC009"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS013",
+            "LBT22CS014",
+            "LBT22CS015",
+            "LBT22CS016",
+            "LBT22CS017",
+            "LBT22CS018",
+            "LBT22CS019"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7EC: VLSI CIRCUIT DESIGN ( ECT304 )"
+      ]
+    },
+    "Room2": {
+      "total": 32,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS020",
+            "LBT22CS021",
+            "LBT22CS022",
+            "LBT22CS023",
+            "LBT22CS024",
+            "LBT22CS025",
+            "LBT22CS026"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT19IT025",
+            "LBT20IT009",
+            "LBT21IT005",
+            "LBT21IT009",
+            "LBT21IT012",
+            "LBT21IT048"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS027",
+            "LBT22CS028",
+            "LBT22CS029",
+            "LBT22CS030",
+            "LBT22CS031",
+            "LBT22CS032"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LLBT21IT058",
+            "LBT22IT001",
+            "LBT22IT002",
+            "LBT22IT003",
+            "LBT22IT004",
+            "LBT22IT005"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS033",
+            "LBT22CS034",
+            "LBT22CS035",
+            "LBT22CS036",
+            "LBT22CS037",
+            "LBT22CS038",
+            "LBT22CS039"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7IT: ALGORITHM ANALYSIS AND DESIGN ( ITT304 )"
+      ]
+    },
+    "Room3": {
+      "total": 32,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS040",
+            "LBT22CS041",
+            "LBT22CS042",
+            "LBT22CS043",
+            "LBT22CS044",
+            "LBT22CS045"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE001",
+            "LBT22ECE002",
+            "LBT22ECE003",
+            "LBT22ECE004",
+            "LBT22ECE005",
+            "LBT22ECE006",
+            "LBT22ECE007"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS046",
+            "LBT22CS047",
+            "LBT22CS048",
+            "LBT22CS049",
+            "LBT22CS050",
+            "LBT22CS051"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE008",
+            "LBT22ECE009",
+            "LBT22ECE010",
+            "LBT22ECE011",
+            "LBT22ECE012",
+            "LBT22ECE013",
+            "LBT22ECE014"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS052",
+            "LBT22CS053",
+            "LBT22CS054",
+            "LBT22CS055",
+            "LBT22CS056",
+            "LBT22CS057"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7ER: EMBEDDED SYSTEMS  AND IOT ( ERT304 )"
+      ]
+    },
+    "Room4": {
+      "total": 31,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS058",
+            "LBT22CS059",
+            "LBT22CS060",
+            "LBT22CS061",
+            "LBT22CS062",
+            "LBT22CS063",
+            "LBT22CS064"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22CE001",
+            "LBT22CE002",
+            "LBT22CE003",
+            "LBT22CE004",
+            "LBT22CE005",
+            "LBT22CE006",
+            "LBT22CE007"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS065",
+            "LBT22CS066",
+            "LBT22CS067",
+            "LBT22CS068",
+            "LBT22CS069",
+            "LBT22CS070"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22CE008",
+            "LBT22CE009",
+            "LBT22CE010",
+            "LBT22CE011",
+            "LBT22CE012"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS071",
+            "LBT22CS072",
+            "LBT22CS074",
+            "LBT22CS075",
+            "LBT22CS076",
+            "LBT22CS077"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7CE: ENVIRONMENTAL ENGINEERING ( CET304 )"
+      ]
+    },
+    "Room5": {
+      "total": 32,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS078",
+            "LBT22CS079",
+            "LBT22CS080",
+            "LBT22CS081",
+            "LBT22CS082",
+            "LBT22CS083",
+            "LBT22CS084"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22EC010",
+            "LBT22EC011",
+            "LBT22EC012",
+            "LBT22EC013",
+            "LBT22EC014",
+            "LBT22EC015"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS085",
+            "LBT22CS086",
+            "LBT22CS087",
+            "LBT22CS088",
+            "LBT22CS089",
+            "LBT22CS090"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22EC017",
+            "LBT22EC018",
+            "LBT22EC019",
+            "LBT22EC020",
+            "LBT22EC021",
+            "LBT22EC022"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS091",
+            "LBT22CS092",
+            "LBT22CS093",
+            "LBT22CS094",
+            "LBT22CS095",
+            "LBT22CS096",
+            "LBT22CS097"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7EC: VLSI CIRCUIT DESIGN ( ECT304 )"
+      ]
+    },
+    "Room6": {
+      "total": 31,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22IT006",
+            "LBT22IT007",
+            "LBT22IT008",
+            "LBT22IT009",
+            "LBT22IT010",
+            "LBT22IT011",
+            "LBT22IT012"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE015",
+            "LBT22ECE016",
+            "LBT22ECE017",
+            "LBT22ECE018",
+            "LBT22ECE019",
+            "LBT22ECE020"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22IT013",
+            "LBT22IT014",
+            "LBT22IT015",
+            "LBT22IT016",
+            "LBT22IT017",
+            "LBT22IT018"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE021",
+            "LBT22ECE022",
+            "LBT22ECE023",
+            "LBT22ECE024",
+            "LBT22ECE025"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22IT019",
+            "LBT22IT020",
+            "LBT22IT021",
+            "LBT22IT022",
+            "LBT22IT023",
+            "LBT22IT024",
+            "LBT22IT025"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7ER: EMBEDDED SYSTEMS  AND IOT ( ERT304 )",
+        "S7IT: ALGORITHM ANALYSIS AND DESIGN ( ITT304 )"
+      ]
+    },
+    "Room7": {
+      "total": 32,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS099",
+            "LBT22CS100",
+            "LBT22CS101",
+            "LBT22CS102",
+            "LBT22CS103",
+            "LBT22CS104"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT22CE013",
+            "LBT22CE014",
+            "LBT22CE015",
+            "LBT22CE016",
+            "LBT22CE017",
+            "LBT22CE018",
+            "LBT22CE019"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS105",
+            "LBT22CS106",
+            "LBT22CS107",
+            "LBT22CS108",
+            "LBT22CS109",
+            "LBT22CS110"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22CE020",
+            "LBT22CE021",
+            "LBT22CE022",
+            "LBT22CE023",
+            "LBT22CE024",
+            "LBT22CE025",
+            "LBT22CE026"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Right3": {
+          "students": [
+            "LBT22CS111",
+            "LBT22CS112",
+            "LBT22CS113",
+            "LBT22CS114",
+            "LBT22CS115",
+            "LBT22CS116"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7CE: ENVIRONMENTAL ENGINEERING ( CET304 )"
+      ]
+    },
+    "Room8": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22EC023",
+            "LBT22EC024",
+            "LBT22EC025",
+            "LBT22EC026",
+            "LBT22EC027",
+            "LBT22EC028"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE026",
+            "LBT22ECE027",
+            "LBT22ECE028",
+            "LBT22ECE029",
+            "LBT22ECE030",
+            "LBT22ECE031",
+            "LBT22ECE032"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22EC029",
+            "LBT22EC030",
+            "LBT22EC031",
+            "LBT22EC032",
+            "LBT22EC033",
+            "LBT22EC034"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE033",
+            "LBT22ECE034",
+            "LBT22ECE035",
+            "LBT22ECE036",
+            "LBT22ECE037"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LBT22EC035",
+            "LBT22EC036",
+            "LBT22EC037",
+            "LBT22EC038",
+            "LBT22EC039",
+            "LBT22EC040"
+          ],
+          "capacity": 7,
+          "count": 6
+        }
+      },
+      "subjects": [
+        "S7ER: EMBEDDED SYSTEMS  AND IOT ( ERT304 )",
+        "S7EC: VLSI CIRCUIT DESIGN ( ECT304 )"
+      ]
+    },
+    "Room9": {
+      "total": 31,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CE027",
+            "LBT22CE028",
+            "LBT22CE029",
+            "LBT22CE030",
+            "LBT22CE032",
+            "LBT22CE033",
+            "LBT22CE034"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22IT026",
+            "LBT22IT027",
+            "LBT22IT028",
+            "LBT22IT029",
+            "LBT22IT030",
+            "LBT22IT031"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LLBT22CE035",
+            "LLBT22CE036",
+            "LLBT22CE037",
+            "LLBT22CE038",
+            "LLBT22CE039",
+            "LLBT22CE040"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22IT032",
+            "LBT22IT033",
+            "LBT22IT034",
+            "LBT22IT035",
+            "LBT22IT036"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Right3": {
+          "students": [
+            "LLBT22CE041",
+            "LLBT22CE042",
+            "LLBT22CE043",
+            "LLBT22CE044",
+            "LLBT22CE045",
+            "LLBT22CE046",
+            "LLBT22CE047"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7IT: ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "S7CE: ENVIRONMENTAL ENGINEERING ( CET304 )"
+      ]
+    },
+    "Room10": {
+      "total": 32,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22CS117",
+            "LBT22CS118",
+            "LBT22CS119",
+            "LBT22CS120",
+            "LBT22CS121",
+            "LBT22CS122",
+            "LBT22CS123"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Left3": {
+          "students": [
+            "LBT22ECE038",
+            "LBT22ECE039",
+            "LBT22ECE040",
+            "LBT22ECE041",
+            "LBT22ECE042",
+            "LBT22ECE043"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Middle2": {
+          "students": [
+            "LBT22CS124",
+            "LBT22CS125",
+            "LBT22CS126",
+            "LBT22CS127",
+            "LLBT22CS128",
+            "LLBT22CS129"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22ECE044",
+            "LBT22ECE045",
+            "LBT22ECE046",
+            "LLBT22ECE047",
+            "LLBT22ECE048",
+            "LLBT22ECE049"
+          ],
+          "capacity": 7,
+          "count": 6
+        },
+        "Right3": {
+          "students": [
+            "LLBT22CS130",
+            "LLBT22CS131",
+            "LLBT22CS132",
+            "LLBT22CS133",
+            "LLBT22CS134",
+            "LLBT22CS135",
+            "LLBT22CS136"
+          ],
+          "capacity": 7,
+          "count": 7
+        }
+      },
+      "subjects": [
+        "S7CSE: COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "S7ER: EMBEDDED SYSTEMS  AND IOT ( ERT304 )"
+      ]
+    },
+    "Room11": {
+      "total": 30,
+      "blocks": {
+        "Left1": {
+          "students": [
+            "LBT22EC041",
+            "LBT22EC042",
+            "LBT22EC043",
+            "LBT22EC044",
+            "LBT22EC045"
+          ],
+          "capacity": 7,
+          "count": 5
+        },
+        "Left3": {
+          "students": [
+            "LBT22IT037",
+            "LBT22IT038",
+            "LBT22IT039",
+            "LBT22IT040",
+            "LBT22IT041",
+            "LBT22IT042",
+            "LBT22IT043"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Middle2": {
+          "students": [
+            "LBT22EC046",
+            "LLBT22EC047",
+            "LLBT22EC048",
+            "LLBT22EC049",
+            "LLBT22EC050",
+            "LLBT22EC051"
+          ],
+          "capacity": 6,
+          "count": 6
+        },
+        "Right1": {
+          "students": [
+            "LBT22IT044",
+            "LBT22IT045",
+            "LLBT22IT046",
+            "LLBT22IT047",
+            "LLBT22IT048",
+            "LLBT22IT049",
+            "LLBT22IT050"
+          ],
+          "capacity": 7,
+          "count": 7
+        },
+        "Right3": {
+          "students": [
+            "LLBT22EC052",
+            "LLBT22EC053",
+            "LLBT22EC054",
+            "LLBT22EC055",
+            "LLBT22EC056"
+          ],
+          "capacity": 7,
+          "count": 5
+        }
+      },
+      "subjects": [
+        "S7IT: ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "S7EC: VLSI CIRCUIT DESIGN ( ECT304 )"
+      ]
+    }
+  },
+  "summary": {
+    "total_rooms": 11,
+    "best_leftovers": 0,
+    "best_difference": 2,
+    "target_difference": 4,
+    "average": 31.272727272727273,
+    "min": 30,
+    "max": 32,
+    "actual_difference": 2
+  },
+  "student_count": 344,
+  "branch_subject_map": {
+    "S7CE": "ENVIRONMENTAL ENGINEERING ( CET304 )",
+    "S7CSE": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+    "S7EC": "VLSI CIRCUIT DESIGN ( ECT304 )",
+    "S7ER": "EMBEDDED SYSTEMS  AND IOT ( ERT304 )",
+    "S7IT": "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )"
+  },
+  "elective_type": "general",
+  "qp_summary": {
+    "room_wise": [
+      {
+        "Room": "Room1",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room1",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room2",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "Student Count": 12
+      },
+      {
+        "Room": "Room2",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room3",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 18
+      },
+      {
+        "Room": "Room3",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 14
+      },
+      {
+        "Room": "Room4",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 19
+      },
+      {
+        "Room": "Room4",
+        "Subject": "ENVIRONMENTAL ENGINEERING ( CET304 )",
+        "Student Count": 12
+      },
+      {
+        "Room": "Room5",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room5",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 12
+      },
+      {
+        "Room": "Room6",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room6",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room7",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 18
+      },
+      {
+        "Room": "Room7",
+        "Subject": "ENVIRONMENTAL ENGINEERING ( CET304 )",
+        "Student Count": 14
+      },
+      {
+        "Room": "Room8",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 30
+      },
+      {
+        "Room": "Room9",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "Student Count": 11
+      },
+      {
+        "Room": "Room9",
+        "Subject": "ENVIRONMENTAL ENGINEERING ( CET304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room10",
+        "Subject": "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )",
+        "Student Count": 20
+      },
+      {
+        "Room": "Room10",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 12
+      },
+      {
+        "Room": "Room11",
+        "Subject": "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )",
+        "Student Count": 14
+      },
+      {
+        "Room": "Room11",
+        "Subject": "VLSI CIRCUIT DESIGN ( ECT304 )",
+        "Student Count": 16
+      }
+    ],
+    "subject_summary": {
+      "COMPUTER GRAPHICS AND IMAGE PROCESSING ( CST304 )": 135,
+      "VLSI CIRCUIT DESIGN ( ECT304 )": 106,
+      "ALGORITHM ANALYSIS AND DESIGN ( ITT304 )": 57,
+      "ENVIRONMENTAL ENGINEERING ( CET304 )": 46
+    },
+    "total_students": 344
+  }
+}
